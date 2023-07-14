@@ -1,0 +1,124 @@
+{
+	"data": [
+		{
+			"id": "1000",
+			"code": 134455,
+			"name": 2341111,
+			"description": "Product Description",
+			"image": "bamboo-watch.jpg",
+			"price": 65,
+			"category": "Accessories",
+			"quantity": 24,
+			"inventoryStatus": 234344,
+			"rating": 5
+		},
+		{
+			"id": "1001",
+			"code": 34224,
+			"name": 134343,
+			"description": "Product Description",
+			"image": "black-watch.jpg",
+			"price": 72,
+			"category": "Accessories",
+			"quantity": 61,
+			"inventoryStatus": 11344,
+			"rating": 4
+		},
+		{
+			"id": "1002",
+			"code": 113344,
+			"name": 23333,
+			"description": "Product Description",
+			"image": "blue-band.jpg",
+			"price": 79,
+			"category": "Fitness",
+			"quantity": 2,
+			"inventoryStatus": 234111,
+			"rating": 3
+		},
+		{
+			"id": "1003",
+			"code": 16788,
+			"name": 1344,
+			"description": "Product Description",
+			"image": "blue-t-shirt.jpg",
+			"price": 29,
+			"category": "Clothing",
+			"quantity": 25,
+			"inventoryStatus": 1333,
+			"rating": 5
+		},
+		{
+			"id": "1004",
+			"code": 42666,
+			"name": 43745,
+			"description": "Product Description",
+			"image": "bracelet.jpg",
+			"price": 15,
+			"category": "Accessories",
+			"quantity": 73,
+			"inventoryStatus": 14441,
+			"rating": 4
+		},
+		{
+			"id": "1005",
+			"code": 45775,
+			"name": 18877,
+			"description": "Product Description",
+			"image": "brown-purse.jpg",
+			"price": 120,
+			"category": "Accessories",
+			"quantity": 0,
+			"inventoryStatus": 134444,
+			"rating": 4
+		},
+		{
+			"id": "1006",
+			"code": 13688,
+			"name": 85333,
+			"description": "Product Description",
+			"image": "chakra-bracelet.jpg",
+			"price": 32,
+			"category": "Accessories",
+			"quantity": 5,
+			"inventoryStatus": 45666,
+			"rating": 3
+		},
+		{
+			"id": "1007",
+			"code": 23434,
+			"name": 52322,
+			"description": "Product Description",
+			"image": "galaxy-earrings.jpg",
+			"price": 34,
+			"category": "Accessories",
+			"quantity": 23,
+			"inventoryStatus":22344,
+			"rating": 5
+		},
+		{
+			"id": "1008",
+			"code": 33422,
+			"name": 23556,
+			"description": "Product Description",
+			"image": "game-controller.jpg",
+			"price": 99,
+			"category": "Electronics",
+			"quantity": 2,
+			"inventoryStatus": 1467,
+			"rating": 4
+		},
+		{
+			"id": "1009",
+			"code": 124344,
+			"name": 54644,
+			"description": "Product Description",
+			"image": "gaming-set.jpg",
+			"price": 299,
+			"category": "Electronics",
+			"quantity": 63,
+			"inventoryStatus": 12334,
+			"rating": 3
+		}
+	]
+}
