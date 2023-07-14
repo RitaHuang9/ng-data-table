@@ -33,19 +33,19 @@
 			"price": 79,
 			"category": "Fitness",
 			"quantity": 2,
-			"inventoryStatus": 234111,
+			"inventoryStatus": 23414411,
 			"rating": 3
 		},
 		{
 			"id": "1003",
-			"code": 16788,
-			"name": 1344,
+			"code": 16722388,
+			"name": 25678,
 			"description": "Product Description",
 			"image": "blue-t-shirt.jpg",
 			"price": 29,
 			"category": "Clothing",
 			"quantity": 25,
-			"inventoryStatus": 1333,
+			"inventoryStatus": 32421,
 			"rating": 5
 		},
 		{
