@@ -1,0 +1,47 @@
+:host ::ng-deep .p-cell-editing {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.i {
+  &-formula {
+    width: 15px;
+  }
+}
+
+.p-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  &:enabled:hover {
+    background: #ebebeb;
+    border: none;
+  }
+  &-icon-only {
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+  }
+}
+
+.t{
+  &-hand{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-title{
+      width: calc(100% - 40px);
+    }
+  }
+}
+
+.btn{
+  background-color: rgb(106, 161, 228);
+  margin-left: 10px;
+  &:enabled:hover{
+    background-color: rgb(74, 116, 167);
+  }
+}
+
+
