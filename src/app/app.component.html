@@ -10,6 +10,7 @@
             <button type="text" pButton  (click)="op.toggle($event)" icon="pi pi-search">
               <img alt="dropdown icon" class="i-formula" src="../assets/formula.png">
             </button>
+
             <p-overlayPanel #op [showCloseIcon]="true">
               <ng-template pTemplate>
                 <input type="text" pInputText [(ngModel)]="value">
@@ -25,10 +26,10 @@
         <td pEditableColumn>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="product.code" />
+              <input pInputText type="text" [(ngModel)]="product.price"  />
             </ng-template>
             <ng-template pTemplate="output">
-              {{ product.code }}
+              {{ headers[0].colFormula ? calculateSum : product.price }}
             </ng-template>
           </p-cellEditor>
         </td>
@@ -38,12 +39,12 @@
               <input
                 pInputText
                 type="text"
-                [(ngModel)]="product.name"
+                [(ngModel)]="product.quantity"
                 required
               />
             </ng-template>
             <ng-template pTemplate="output">
-              {{ product.name }}
+              {{ headers[1].colFormula ?  calc(product)  : product.quantity }}
             </ng-template>
           </p-cellEditor>
         </td>
@@ -53,29 +54,15 @@
               <input
                 pInputText
                 type="text"
-                [(ngModel)]="product.name"
+                [(ngModel)]="product.rating"
                 required
               />
             </ng-template>
             <ng-template pTemplate="output">
-              {{ product.inventoryStatus }}
+              {{ headers[2].colFormula ? calculateSum : product.rating }}
             </ng-template>
           </p-cellEditor>
         </td>
-        <!-- <td pEditableColumn>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <p-dropdown
-                [options]="statuses"
-                [(ngModel)]="product.inventoryStatus"
-                [style]="{ width: '100%' }"
-              ></p-dropdown>
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ product.inventoryStatus }}
-            </ng-template>
-          </p-cellEditor>
-        </td> -->
       </tr>
     </ng-template>
   </p-table>

@@ -3,6 +3,7 @@ import { Product } from 'src/product';
 import { ProductService } from 'src/productService';
 import { SelectItem } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import * as math from 'mathjs';
 
 interface header{
   colCode: string,
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit {
   statuses!: SelectItem[];
 
   value: string = '';
+  calculateSum!: number;
 
   headers:header[] = [
     {
@@ -46,6 +48,7 @@ export class AppComponent implements OnInit {
     },
   ]
 
+  // 取得公式
   getValue(colName: string) {
     for (let header of this.headers) {
       if (header.colName === colName) {
@@ -53,10 +56,19 @@ export class AppComponent implements OnInit {
         break;
       }
     }
-    this.value = ''
-    console.log(this.value, colName, this.headers);
-    // console.log(colName);
+    // this.value = ''
+
+
+
   }
+
+  calc(prod:Product){
+    return math.evaluate(this.headers[1].colFormula , prod)
+  }
+
+
+
+
 
   clonedProducts: { [s: string]: Product } = {};
 
