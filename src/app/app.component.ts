@@ -35,6 +35,8 @@ export class AppComponent implements OnInit {
   selectedFiles1!: TreeNode;
 
   value: string = '';
+  values : any[] = ['','',''];
+
   calculateSum!: number;
 
   headers: header[] = [
@@ -56,14 +58,12 @@ export class AppComponent implements OnInit {
   ];
 
   // 取得公式
-  getValue(colName: string) {
-    // for (let header of this.headers) {
-    //   if (header.colName === colName) {
-    //     header.colFormula = this.value;
-    //     break;
-    //   }
-    // }
-    // this.checkCaretPosition();
+  getValue(idx:number) {
+    this.headers[idx].colFormula = this.values[idx];
+  }
+
+  closeOP() {
+    console.log(this.overlayPanel);
     this.overlayPanel.hide();
   }
 
@@ -146,14 +146,14 @@ export class AppComponent implements OnInit {
   nodeSelect(event: any,index: number) {
     if (event.node.leaf) {
       const addFormula = event.node.label;
-      const value = this.headers[index].colFormula
+      const value = this.values[index];
       const newValue =
       //找前面的值
       value.slice(0, Number(this.checkCaretPosition())) +
         addFormula +
         //找後面的值
         value.slice(Number(this.checkCaretPosition()));
-        this.headers[index].colFormula = newValue;
+        this.values[index] = newValue;
     }
 
   }

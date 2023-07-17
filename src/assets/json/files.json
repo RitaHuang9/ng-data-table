@@ -4,31 +4,29 @@
       "label": "欄位",
       "value": "column",
       "data": "Documents Folder",
-      "expandedIcon": "pi pi-folder-open",
-      "collapsedIcon": "pi pi-folder",
       "children": [
         {
           "label": "price",
           "value": "price",
           "data": "Work Folder",
-          "expandedIcon": "pi pi-folder-open",
-          "collapsedIcon": "pi pi-folder",
+          "expandedIcon": "",
+          "collapsedIcon": "",
           "leaf": true
         },
         {
           "label": "quantity",
           "value": "quantity",
           "data": "Work Folder",
-          "expandedIcon": "pi pi-folder-open",
-          "collapsedIcon": "pi pi-folder",
+          "expandedIcon": "",
+          "collapsedIcon": "",
           "leaf": true
         },
         {
           "label": "rating",
           "value": "rating",
           "data": "Work Folder",
-          "expandedIcon": "pi pi-folder-open",
-          "collapsedIcon": "pi pi-folder",
+          "expandedIcon": "",
+          "collapsedIcon": "",
           "leaf": true
         }
       ]
@@ -36,48 +34,48 @@
     {
       "label": "基本運算",
       "data": "Pictures Folder",
-      "expandedIcon": "pi pi-folder-open",
-      "collapsedIcon": "pi pi-folder",
+      "expandedIcon": "",
+      "collapsedIcon": "",
       "children": [
         {
           "label": "+",
           "value": "+",
-          "icon": "pi pi-image",
+          "icon": "",
           "data": "Barcelona Photo",
           "leaf": true
         },
         {
           "label": "-",
           "value": "-",
-          "icon": "pi pi-image",
+          "icon": "",
           "data": "PrimeFaces Logo",
           "leaf": true
         },
         {
           "label": "x",
           "value": "x",
-          "icon": "pi pi-image",
+          "icon": "",
           "data": "PrimeUI Logo",
           "leaf": true
         },
         {
           "label": "/",
           "value": "/",
-          "icon": "pi pi-image",
+          "icon": "",
           "data": "PrimeUI Logo",
           "leaf": true
         },
         {
           "label": "(",
           "value": "(",
-          "icon": "pi pi-image",
+          "icon": "",
           "data": "PrimeUI Logo",
           "leaf": true
         },
         {
           "label": ")",
           "value": ")",
-          "icon": "pi pi-image",
+          "icon": "",
           "data": "PrimeUI Logo",
           "leaf": true
         }
@@ -87,69 +85,69 @@
       "label": "公式",
       "value": "formula",
       "data": "Pictures Folder",
-      "expandedIcon": "pi pi-folder-open",
-      "collapsedIcon": "pi pi-folder",
+      "expandedIcon": "",
+      "collapsedIcon": "",
       "children": [
         {
           "label": "sqrt()",
           "value": "開根號",
-          "icon": "pi pi-image",
+          "icon": "",
           "data": "Barcelona Photo",
           "leaf": true
         },
         {
           "label": "abs(a,b)",
           "value": "返回一个數字的絕對值",
-          "icon": "pi pi-image",
+          "icon": "",
           "data": "PrimeFaces Logo",
           "leaf": true
         },
         {
           "label": "pow(a,b)",
           "value": "pow(a,b)",
-          "icon": "pi pi-image",
+          "icon": "",
           "data": "PrimeUI Logo",
           "leaf": true
         },
         {
           "label": "ceil()",
           "value": "四捨五入",
-          "icon": "pi pi-image",
+          "icon": "",
           "data": "PrimeUI Logo",
           "leaf": true
         },
         {
           "label": "round()",
           "value": "",
-          "icon": "pi pi-image",
+          "icon": "",
           "data": "PrimeUI Logo",
           "leaf": true
         },
         {
           "label": "floor()",
           "value": "回傳小於等於所給數字的最大整數",
-          "icon": "pi pi-image",
+          "icon": "",
           "data": "PrimeUI Logo",
           "leaf": true
         },
         {
           "label": "max(a,b,...)",
           "value": "",
-          "icon": "pi pi-image",
+          "icon": "",
           "data": "PrimeUI Logo",
           "leaf": true
         },
         {
           "label": "min(a,b,...)",
           "value": "",
-          "icon": "pi pi-image",
+          "icon": "",
           "data": "PrimeUI Logo",
           "leaf": true
         },
         {
           "label": "tanh()",
           "value": "",
-          "icon": "pi pi-image",
+          "icon": "",
           "data": "PrimeUI Logo",
           "leaf": true
         }
