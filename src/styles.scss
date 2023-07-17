@@ -5,3 +5,23 @@
 body {
   font-family: var(--font-family);
 }
+
+.c {
+  &-tree {
+    margin-bottom: 10px;
+    .p-tree {
+      padding: 10px;
+      margin: 10px 0;
+      height: 200px;
+      overflow: auto;
+      width: 100%;
+    }
+  }
+}
+
+.p{
+  &-overlaypanel{
+    width: 100%;
+    max-width: 300px;
+  }
+}

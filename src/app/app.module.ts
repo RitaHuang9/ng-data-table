@@ -19,8 +19,11 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { InputTextModule } from 'primeng/inputtext';
-import { MessageService} from 'primeng/api';
+import { MessageService, } from 'primeng/api';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+import { NodeService } from 'src/nodeService';
+
+import {TreeModule} from 'primeng/tree';
 
 @NgModule({
   declarations: [
@@ -44,9 +47,11 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
     HttpClientModule,
     FormsModule,
     OverlayPanelModule,
+    TreeModule
   ],
   providers: [ProductService,
-    MessageService
+    MessageService,
+    NodeService
   ],
   bootstrap: [AppComponent]
 })

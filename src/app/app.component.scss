@@ -3,27 +3,36 @@
   padding-bottom: 0 !important;
 }
 
+.container{
+  max-width: 1200px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
 .i {
   &-formula {
     width: 15px;
   }
 }
 
-.p-button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  &:enabled:hover {
-    background: #ebebeb;
+.p{
+  &-button {
+    background: transparent;
     border: none;
-  }
-  &-icon-only {
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
+    cursor: pointer;
+    &:enabled:hover {
+      background: #ebebeb;
+      border: none;
+    }
+    &-icon-only {
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+    }
   }
 }
+
+
 
 .t{
   &-hand{
@@ -43,5 +52,6 @@
     background-color: rgb(74, 116, 167);
   }
 }
+
 
 

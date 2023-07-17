@@ -1,70 +1,119 @@
-<div class="card">
-  <h5>Cell Editing</h5>
-  <p-table [value]="products1" dataKey="id">
-    <ng-template pTemplate="header">
-      <tr>
-        <th *ngFor="let header of headers">
-          <div class="t-hand p-d-flex p-jc-between p-ai-center">
-            <p class="t-hand-title">{{ header.colName }}  </p>
+<div class="container">
+  <div class="card">
+    <p-table [value]="products1" dataKey="id">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let header of headers let i = index" >
+            <div class="t-hand p-d-flex p-jc-between p-ai-center">
+              <p class="t-hand-title">{{ header.colName }}</p>
+              <i class="pi pi-check"></i>
+              <button
+                type="text"
+                pButton
+                (click)="op.toggle($event)"
+                icon="pi pi-search"
+              >
+                <img
+                  alt="dropdown icon"
+                  class="i-formula"
+                  src="../assets/formula.png"
+                />
+              </button>
 
-            <button type="text" pButton  (click)="op.toggle($event)" icon="pi pi-search">
-              <img alt="dropdown icon" class="i-formula" src="../assets/formula.png">
-            </button>
-
-            <p-overlayPanel #op [showCloseIcon]="true">
-              <ng-template pTemplate>
-                <input type="text" pInputText [(ngModel)]="value">
-                <button pButton type="button" label="確認" class="btn" (click)="getValue(header.colName)"></button>
+              <p-overlayPanel #op [showCloseIcon]="true">
+                <ng-template pTemplate>
+                  <input
+                    type="text"
+                    pInputText
+                    #formulaInput
+                    [(ngModel)]="headers[i].colFormula"
+                    style="width: 100%"
+                  />
+                  <!-- 收合按鈕 -->
+                  <div style="margin: 10px 0">
+                    <button
+                      pButton
+                      class="btn"
+                      type="button"
+                      label="全部展開"
+                      (click)="expandAll()"
+                      style="margin-left: 0"
+                    ></button>
+                    <button
+                      pButton
+                      class="btn"
+                      type="button"
+                      label="全部收起"
+                      (click)="collapseAll()"
+                    ></button>
+                  </div>
+                  <p-tree
+                    [value]="files2"
+                    class="c-tree"
+                    selectionMode="multiple"
+                    (onNodeSelect)="nodeSelect($event,i)"
+                    (onNodeUnselect)="nodeUnselect($event)"
+                  ></p-tree>
+                  <button
+                    pButton
+                    type="button"
+                    label="確認"
+                    class="btn"
+                    (click)="getValue(header.colName)"
+                  ></button>
+                </ng-template>
+              </p-overlayPanel>
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td pEditableColumn>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="product.price" />
               </ng-template>
-          </p-overlayPanel>
-          </div>
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-product>
-      <tr>
-        <td pEditableColumn>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="product.price"  />
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ headers[0].colFormula ? calculateSum : product.price }}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td pEditableColumn>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input
-                pInputText
-                type="text"
-                [(ngModel)]="product.quantity"
-                required
-              />
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ headers[1].colFormula ?  calc(product)  : product.quantity }}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td pEditableColumn>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input
-                pInputText
-                type="text"
-                [(ngModel)]="product.rating"
-                required
-              />
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ headers[2].colFormula ? calculateSum : product.rating }}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+              <ng-template pTemplate="output">
+                {{ headers[0].colFormula ? calc(product, 0) : product.price }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td pEditableColumn>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input
+                  pInputText
+                  type="text"
+                  [(ngModel)]="product.quantity"
+                  required
+                />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{
+                  headers[1].colFormula ? calc(product, 1) : product.quantity
+                }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td pEditableColumn>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input
+                  pInputText
+                  type="text"
+                  [(ngModel)]="product.rating"
+                  required
+                />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ headers[2].colFormula ? calc(product, 2) : product.rating }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </div>
 <router-outlet></router-outlet>
