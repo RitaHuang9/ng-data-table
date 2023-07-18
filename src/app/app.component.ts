@@ -12,7 +12,8 @@ import { MultiSelectChangeEvent } from 'primeng/multiselect';
 interface header {
   colCode: string;
   colFormula: string;
-  rowsFormula? : colRowFormula[];
+  calculate: string;
+  rowsFormula?: colRowFormula[];
 }
 
 interface colRowFormula {
@@ -32,6 +33,11 @@ interface col {
   default: boolean;
 }
 
+//footer
+interface City {
+  name: string;
+  code: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -57,15 +63,18 @@ export class AppComponent implements OnInit {
   value: string = '';
   values: any[] = [];
 
-  calculateSum!: number;
-
   headers: header[] = [];
-  versions: version[] = []
+  versions: version[] = [];
   allCols: col[] = [];
   cols: col[] = [];
   sortCols: col[] = [];
-  field:string = '';
-  header:string = '';
+  field: string = '';
+  header: string = '';
+
+  cities: City[];
+
+  selectedCity!: City;
+  calculateTotals: any[] = [];
 
   clonedProducts: { [s: string]: Product } = {};
 
@@ -73,25 +82,32 @@ export class AppComponent implements OnInit {
     private productService: ProductService,
     private messageService: MessageService,
     private nodeService: NodeService
-  ) { }
+  ) {
+    this.cities = [
+      { name: '加總', code: 'sum' },
+      { name: '平均', code: 'avage' },
+      { name: '最大值', code: 'max' },
+      { name: '最小值', code: 'min' },
+    ];
+  }
 
   ngOnInit() {
-
     //設定所有欄位的field 與中文名稱
     this.allCols = [
-      { index:0,  field: 'id', header: 'ID' , default: true },
-      { index:1,  field: 'code', header: '產品名代號' , default: true },
-      { index:2,  field: 'name', header: '產品名稱', default: true  },
-      { index:3,  field: 'price', header: '價格' , default: true },
-      { index:4,  field: 'quantity', header: '數量', default: true  },
-      { index:5,  field: 'inventoryStatus', header: '發票', default: true  },
-      { index:6,  field: 'category', header: '類別', default: true  },
-      { index:7,  field: 'rating', header: '評分', default: true  }
+      { index: 0, field: 'id', header: 'ID', default: true },
+      { index: 1, field: 'code', header: '產品名代號', default: true },
+      { index: 2, field: 'name', header: '產品名稱', default: true },
+      { index: 3, field: 'price', header: '價格', default: true },
+      { index: 4, field: 'quantity', header: '數量', default: true },
+      { index: 5, field: 'inventoryStatus', header: '發票', default: true },
+      { index: 6, field: 'category', header: '類別', default: true },
+      { index: 7, field: 'rating', header: '評分', default: true },
     ];
 
     //預設全選
-    this.cols =  this.allCols;
+    this.cols = this.allCols;
 
+    // 各版本預設
     this.versions = [
       {
         name: 'V.1',
@@ -99,16 +115,19 @@ export class AppComponent implements OnInit {
           {
             colCode: 'price',
             colFormula: '',
+            calculate: 'RM',
           },
           {
             colCode: 'quantity',
             colFormula: 'floor( price * quantity )',
+            calculate: '',
           },
           {
             colCode: 'rating',
             colFormula: '',
+            calculate: '',
           },
-        ]
+        ],
       },
       {
         name: 'V.2',
@@ -116,22 +135,31 @@ export class AppComponent implements OnInit {
           {
             colCode: 'price',
             colFormula: '',
+            calculate: '',
           },
           {
             colCode: 'quantity',
             colFormula: '',
+            calculate: '',
           },
           {
             colCode: 'rating',
             colFormula: 'floor(sqrt(round(price * quantity * 10) *2))',
+            calculate: '',
           },
-        ]
-      }
+        ],
+      },
     ];
 
     this.productService
       .getProductsSmall()
-      .then((data) => (this.products1 = data));
+      .then((data) => (this.products1 = data))
+      .then(() => {
+        let ary = this.products1;
+        let result = ary.map((a) => a.id);
+        // console.table(ary);
+        // console.log(result, this.selectedCity);
+      });
     this.productService
       .getProductsSmall()
       .then((data) => (this.products2 = data));
@@ -149,31 +177,7 @@ export class AppComponent implements OnInit {
     this.headers = this.versions[0].setting;
   }
 
-  onRowEditInit(product: Product) {
-    this.clonedProducts[product.id] = { ...product };
-  }
 
-  onRowEditSave(product: Product) {
-    if (product.price > 0) {
-      delete this.clonedProducts[product.id];
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'Product is updated',
-      });
-    } else {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'Invalid Price',
-      });
-    }
-  }
-
-  onRowEditCancel(product: Product, index: number) {
-    this.products2[index] = this.clonedProducts[product.id];
-    // delete this.products2[product.id];
-  }
 
   // 公式樹狀圖-全部展開
   expandAll() {
@@ -194,19 +198,18 @@ export class AppComponent implements OnInit {
   }
 
   //點選公式 並加入至input
-  nodeSelect(event: any, index: number) {
+  nodeSelect(event: any, index: number, colCode: string) {
     if (event.node.leaf) {
       const addFormula = event.node.label;
-      const value = this.values[index];
+      const value = this.formulaInput.nativeElement.value;
       const newValue =
         //找前面的值
         value.slice(0, Number(this.checkCaretPosition())) +
         addFormula +
         //找後面的值
         value.slice(Number(this.checkCaretPosition()));
-      this.values[index] = newValue;
+      this.formulaInput.nativeElement.value = newValue;
     }
-
   }
 
   nodeUnselect(event: any) {
@@ -231,28 +234,25 @@ export class AppComponent implements OnInit {
     this.headers[idx].colFormula = this.values[idx];
   }
 
-  calc(prod: Product, colCode: string,rowIdx :number):any {
-
+  calc(prod: Product, colCode: string, rowIdx: number): any {
     let temp = this.headers.find((user) => user.colCode === colCode);
 
-    let colFormula = "";
+    let colFormula = '';
 
-    if(temp)  {
+    if (temp) {
       let tempRow = temp.rowsFormula?.find((y) => y.rowIdx === rowIdx);
       colFormula = tempRow ? tempRow.colFormula : temp.colFormula;
-    }
-    else
-    {
-      return "";
+    } else {
+      return '';
     }
 
-    return colFormula ? math.evaluate(colFormula, prod) : this.getObjValueBykey(prod,colCode) ;
-
+    return colFormula
+      ? math.evaluate(colFormula, prod)
+      : this.getObjValueBykey(prod, colCode);
   }
 
   //動態取得物件Value by key
-  getObjValueBykey(obj:any,key:string)
-  {
+  getObjValueBykey(obj: any, key: string) {
     type ObjectKey = keyof typeof obj;
 
     const myVar = key as ObjectKey;
@@ -262,44 +262,113 @@ export class AppComponent implements OnInit {
 
   getColFormula(colCode: string) {
     let temp = this.headers.find((x) => x.colCode === colCode);
-    return temp ? temp.colFormula : "";
+    return temp ? temp.colFormula : '';
+  }
+
+  // footer-加總 name:下拉選項 propertyName:column的名稱
+  footerSum(propertyName: string) {
+
+    let calcType = this.getColCalculate(propertyName)
+    let dataList = this.products1.map((item: any) => item[propertyName]);
+
+    if (typeof dataList[0] === 'number') {
+      if (calcType === 'sum') {
+        return math.sum(dataList);
+
+      } else if (calcType === 'avage') {
+        let average = math.mean(dataList);
+        return average;
+      } else if (calcType === 'max') {
+        let max = math.max(dataList);
+        return max;
+      } else {
+        let min = math.min(dataList);
+        return min;
+      }
+    } else {
+      return '';
+    }
+  }
+
+  checkType(propertyName: string){
+    let dataList = this.products1.map((item: any) => item[propertyName]);
+    return typeof dataList[0] === 'number';
+  }
+
+  getColCalculate(colCode: string) {
+    let temp = this.headers.find((x) => x.colCode === colCode);
+    let dataList = this.products1.map((item: any) => item[colCode]);
+
+    return temp ? temp.calculate : '';
   }
 
   setColFormula(colCode: string) {
     console.log(this.formulaInput.nativeElement.value);
 
-    this.headers = this.headers.map((h) => {
-      if (h.colCode === colCode) {
-        return {
-          ...h,
-          colFormula: this.formulaInput.nativeElement.value,
-        };
-      }
-      return h;
-    });
+    let tempCol = this.headers.find((x) => x.colCode === colCode);
+    console.log(tempCol);
+    if (tempCol) {
+      this.headers = this.headers.map((h) => {
+        if (h.colCode === colCode) {
+          return {
+            ...h,
+            colFormula: this.formulaInput.nativeElement.value,
+          };
+        }
+        return h;
+      });
+    } else {
+      this.headers.push({
+        colCode: colCode,
+        colFormula: this.formulaInput.nativeElement.value,
+        calculate: '',
+      });
+    }
   }
 
-  getRowColFormula(colCode: string,rowIdx: number) {
+  // footer 加總
+  setColCalculate(event: any, colCode: string) {
+    // console.log(event);
+    let tempCol = this.headers.find((x) => x.colCode === colCode);
+    // console.log(tempCol);
+    if (tempCol) {
+      this.headers = this.headers.map((h) => {
+        if (h.colCode === colCode) {
+          return {
+            ...h,
+            calculate: event.value,
+          };
+        }
+        return h;
+      });
+    }else {
+      this.headers.push({
+        colCode: colCode,
+        colFormula: '',
+        calculate: event.value,
+      });
+    }
+
+  }
+
+  getRowColFormula(colCode: string, rowIdx: number) {
     let temp = this.headers.find((x) => x.colCode === colCode);
-    if(temp)  {
+    if (temp) {
       let tempRow = temp.rowsFormula?.find((y) => y.rowIdx === rowIdx);
       return tempRow ? tempRow.colFormula : temp.colFormula;
-    }
-    else
-    {
-      return "";
+    } else {
+      return '';
     }
   }
 
-  setRowColFormula(colCode: string,rowIdx: number) {
+  setRowColFormula(colCode: string, rowIdx: number) {
     console.log(this.rowformulaInput.nativeElement.value);
-    console.log(colCode,rowIdx);
+    console.log(colCode, rowIdx);
     this.headers = this.headers.map((h) => {
       if (h.colCode === colCode) {
         let tempRow = h.rowsFormula?.find((x) => x.rowIdx === rowIdx);
         console.log(tempRow);
-        if(tempRow)
-        {
+        if (tempRow) {
           h.rowsFormula = h.rowsFormula?.map((r) => {
             if (r.rowIdx === rowIdx) {
               return {
@@ -310,27 +379,24 @@ export class AppComponent implements OnInit {
             console.log(r);
             return r;
           });
-        }
-        else
-        {
+        } else {
           h.rowsFormula?.push({
-            rowIdx:rowIdx,
-            colFormula :this.rowformulaInput.nativeElement.value
+            rowIdx: rowIdx,
+            colFormula: this.rowformulaInput.nativeElement.value,
           });
 
-          if(h.rowsFormula){
+          if (h.rowsFormula) {
             h.rowsFormula?.push({
-              rowIdx:rowIdx,
-              colFormula :this.rowformulaInput.nativeElement.value
+              rowIdx: rowIdx,
+              colFormula: this.rowformulaInput.nativeElement.value,
             });
-          }
-          else{
+          } else {
             h.rowsFormula = [
               {
-                rowIdx:rowIdx,
+                rowIdx: rowIdx,
                 colFormula: this.rowformulaInput.nativeElement.value,
-              }
-            ]
+              },
+            ];
           }
 
           console.log(h);
@@ -340,29 +406,53 @@ export class AppComponent implements OnInit {
     });
   }
 
-
-  getCols()
-  {
+  getCols() {
     // 回傳cols排序
-    return this.cols.sort(({index:a}, {index:b}) => a-b)
+    return this.cols.sort(({ index: a }, { index: b }) => a - b);
   }
 
-  addCustCol()
-  {
-    const newCol :col ={
+  addCustCol() {
+    const newCol: col = {
       index: this.allCols.length,
       field: `custCol_${this.allCols.length}`,
-      header:this.header,
-      default:false
-    }
+      header: this.header,
+      default: false,
+    };
 
     this.allCols.push(newCol);
 
-    const newHeader :header ={
-      colCode:newCol.field,
-      colFormula:''
-    }
+    const newHeader: header = {
+      colCode: newCol.field,
+      colFormula: '',
+      calculate: '',
+    };
 
     this.headers.push(newHeader);
   }
+
+  // onRowEditInit(product: Product) {
+  //   this.clonedProducts[product.id] = { ...product };
+  // }
+
+  // onRowEditSave(product: Product) {
+  //   if (product.price > 0) {
+  //     delete this.clonedProducts[product.id];
+  //     this.messageService.add({
+  //       severity: 'success',
+  //       summary: 'Success',
+  //       detail: 'Product is updated',
+  //     });
+  //   } else {
+  //     this.messageService.add({
+  //       severity: 'error',
+  //       summary: 'Error',
+  //       detail: 'Invalid Price',
+  //     });
+  //   }
+  // }
+
+  // onRowEditCancel(product: Product, index: number) {
+  //   this.products2[index] = this.clonedProducts[product.id];
+  //   delete this.products2[product.id];
+  // }
 }
