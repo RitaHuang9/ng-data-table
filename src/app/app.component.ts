@@ -7,6 +7,7 @@ import { NodeService } from 'src/nodeService';
 import { TreeNode } from 'primeng/api';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import * as math from 'mathjs';
+import * as FileSaver from 'file-saver';
 import { MultiSelectChangeEvent } from 'primeng/multiselect';
 
 interface header {
@@ -75,6 +76,9 @@ export class AppComponent implements OnInit {
 
   selectedCity!: City;
   calculateTotals: any[] = [];
+
+  exportColumns!: any[];
+
 
   clonedProducts: { [s: string]: Product } = {};
 
@@ -151,6 +155,11 @@ export class AppComponent implements OnInit {
       },
     ];
 
+    this.exportColumns = this.cols.map(col => ({
+      title: col.header,
+      dataKey: col.field
+    }));
+
     this.productService
       .getProductsSmall()
       .then((data) => (this.products1 = data))
@@ -176,8 +185,6 @@ export class AppComponent implements OnInit {
 
     this.headers = this.versions[0].setting;
   }
-
-
 
   // 公式樹狀圖-全部展開
   expandAll() {
@@ -267,14 +274,12 @@ export class AppComponent implements OnInit {
 
   // footer-加總 name:下拉選項 propertyName:column的名稱
   footerSum(propertyName: string) {
-
-    let calcType = this.getColCalculate(propertyName)
+    let calcType = this.getColCalculate(propertyName);
     let dataList = this.products1.map((item: any) => item[propertyName]);
 
     if (typeof dataList[0] === 'number') {
       if (calcType === 'sum') {
         return math.sum(dataList);
-
       } else if (calcType === 'avage') {
         let average = math.mean(dataList);
         return average;
@@ -289,8 +294,8 @@ export class AppComponent implements OnInit {
       return '';
     }
   }
-
-  checkType(propertyName: string){
+  //判斷body資料型別 否的話就不會顯示footer下拉
+  checkType(propertyName: string) {
     let dataList = this.products1.map((item: any) => item[propertyName]);
     return typeof dataList[0] === 'number';
   }
@@ -341,14 +346,13 @@ export class AppComponent implements OnInit {
         }
         return h;
       });
-    }else {
+    } else {
       this.headers.push({
         colCode: colCode,
         colFormula: '',
         calculate: event.value,
       });
     }
-
   }
 
   getRowColFormula(colCode: string, rowIdx: number) {
@@ -428,6 +432,41 @@ export class AppComponent implements OnInit {
     };
 
     this.headers.push(newHeader);
+  }
+
+  // exportPdf() {
+  //   import('jspdf').then((jsPDF) => {
+  //     import('jspdf-autotable').then((x) => {
+  //       const doc = new jsPDF.default(0, 0);
+  //       doc.autoTable(this.exportColumns, this.products1);
+  //       doc.save('products.pdf');
+  //     });
+  //   });
+  // }
+
+  exportExcel() {
+    import('xlsx').then((xlsx) => {
+      const worksheet = xlsx.utils.json_to_sheet(this.products1);
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      this.saveAsExcelFile(excelBuffer, 'products');
+    });
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    FileSaver.saveAs(
+      data,
+      fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
+    );
   }
 
   // onRowEditInit(product: Product) {

@@ -47,6 +47,13 @@
 
   <div class="card">
     <p-table [value]="products1" dataKey="id" [columns]="getCols()">
+      <ng-template pTemplate="caption">
+        <div class="flex">
+            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2 btn"  pTooltip="XLS" tooltipPosition="bottom">XLS</button>
+
+            <!-- <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button> -->
+        </div>
+    </ng-template>
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th *ngFor="let col of columns; let i = index">
