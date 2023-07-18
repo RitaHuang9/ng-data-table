@@ -5,6 +5,23 @@
 body {
   font-family: var(--font-family);
 }
+.p-dropdown-items-wrapper,
+body{
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #a6b7d3;
+    border-radius: 5px;
+  }
+}
+
+
 
 .c {
   &-tree {
@@ -71,3 +88,5 @@ body {
     text-align: left;
   }
 }
+
+

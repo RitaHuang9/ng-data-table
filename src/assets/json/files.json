@@ -52,8 +52,8 @@
           "leaf": true
         },
         {
-          "label": "x",
-          "value": "x",
+          "label": "*",
+          "value": "*",
           "icon": "",
           "data": "PrimeUI Logo",
           "leaf": true
