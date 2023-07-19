@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/f230122c-02f2-4dce-862c-ef8c28ec3418/resourceGroups/CDCPOC/providers/Microsoft.Web/sites/DynamicTablePOC",
+    "appService.deploySubpath": "dist\\data-table"
+}
