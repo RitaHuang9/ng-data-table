@@ -3,7 +3,7 @@
   padding-bottom: 0 !important;
 }
 
-.container{
+.container {
   max-width: 1480px;
   padding: 0 20px;
   margin: 0 auto;
@@ -14,7 +14,7 @@
   }
 }
 
-.p{
+.p {
   &-button {
     background: transparent;
     border: none;
@@ -32,30 +32,30 @@
   }
 }
 
-
-
-
-.t{
-  &-hand{
+.t {
+  &-hand {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    &-title{
+    &-title {
       width: calc(100% - 40px);
     }
   }
 }
 
-.btn{
+.btn {
   background-color: rgb(106, 161, 228);
   margin-left: 10px;
-  &:enabled:hover{
+  &:enabled:hover {
     background-color: rgb(74, 116, 167);
   }
-  &-secondary{
+  &-secondary {
     background-color: #6db7bc;
   }
+  &-export ::ng-deep {
+    display: block;
+    .pi {
+      margin-right: 4px;
+    }
+  }
 }
-
-
-

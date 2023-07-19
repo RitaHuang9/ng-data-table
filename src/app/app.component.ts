@@ -331,11 +331,9 @@ export class AppComponent implements OnInit {
     }
   }
 
-  // footer 加總
+  // footer 加總運算功能
   setColCalculate(event: any, colCode: string) {
-    // console.log(event);
     let tempCol = this.headers.find((x) => x.colCode === colCode);
-    // console.log(tempCol);
     if (tempCol) {
       this.headers = this.headers.map((h) => {
         if (h.colCode === colCode) {
@@ -434,16 +432,8 @@ export class AppComponent implements OnInit {
     this.headers.push(newHeader);
   }
 
-  // exportPdf() {
-  //   import('jspdf').then((jsPDF) => {
-  //     import('jspdf-autotable').then((x) => {
-  //       const doc = new jsPDF.default(0, 0);
-  //       doc.autoTable(this.exportColumns, this.products1);
-  //       doc.save('products.pdf');
-  //     });
-  //   });
-  // }
 
+  // 匯出excel
   exportExcel() {
     import('xlsx').then((xlsx) => {
       const worksheet = xlsx.utils.json_to_sheet(this.products1);
@@ -473,25 +463,5 @@ export class AppComponent implements OnInit {
   //   this.clonedProducts[product.id] = { ...product };
   // }
 
-  // onRowEditSave(product: Product) {
-  //   if (product.price > 0) {
-  //     delete this.clonedProducts[product.id];
-  //     this.messageService.add({
-  //       severity: 'success',
-  //       summary: 'Success',
-  //       detail: 'Product is updated',
-  //     });
-  //   } else {
-  //     this.messageService.add({
-  //       severity: 'error',
-  //       summary: 'Error',
-  //       detail: 'Invalid Price',
-  //     });
-  //   }
-  // }
 
-  // onRowEditCancel(product: Product, index: number) {
-  //   this.products2[index] = this.clonedProducts[product.id];
-  //   delete this.products2[product.id];
-  // }
 }

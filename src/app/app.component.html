@@ -1,59 +1,68 @@
 <div class="container">
-
   <!-- 版本選擇 -->
-  <div class="c-inputCard card flex justify-content-center">
-    <p-dropdown
-      [options]="versions"
-      [(ngModel)]="headers"
-      optionLabel="name"
-      optionValue="setting"
-      [showClear]="true"
-      placeholder="Select a Version"
-    >
-    </p-dropdown>
-    <p-multiSelect
-      [options]="allCols"
-      onChange="getCols($event)"
-      [(ngModel)]="cols"
-      optionLabel="header"
-      class="c-inputCard-multiSelect"
-    ></p-multiSelect>
-    <p-button
-      label="新增欄位"
-      icon="pi pi-plus"
-      iconPos="left"
-      (click)="addcol.toggle($event)"
-    >
-    </p-button>
-    <p-overlayPanel #addcol [showCloseIcon]="true">
-      <ng-template pTemplate>
-        <input
-          type="text"
-          pInputText
-          #formulaInput
-          [(ngModel)]="header"
-          style="width: 100%"
-        />
-        <button
-          pButton
-          type="button"
-          label="確認"
-          class="btn"
-          (click)="addCustCol(); addcol.hide()"
-        ></button>
-      </ng-template>
-    </p-overlayPanel>
-  </div>
+
 
   <div class="card">
     <p-table [value]="products1" dataKey="id" [columns]="getCols()">
-      <ng-template pTemplate="caption">
-        <div class="flex">
-            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2 btn"  pTooltip="XLS" tooltipPosition="bottom">XLS</button>
-
-            <!-- <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button> -->
+      <ng-template pTemplate="caption" >
+        <div class="flex c-table-header">
+          <button
+            type="button"
+            pButton
+            pRipple
+            icon="pi pi-file-excel"
+            (click)="exportExcel()"
+            class="btn-export p-button-success p-button-outlined mr-2 btn"
+            pTooltip="XLS"
+            tooltipPosition="bottom"
+          >
+            XLS
+          </button>
+          <div class="c-inputCard card flex justify-content-center">
+            <p-dropdown
+              [options]="versions"
+              [(ngModel)]="headers"
+              optionLabel="name"
+              optionValue="setting"
+              [showClear]="true"
+              placeholder="Select a Version"
+            >
+            </p-dropdown>
+            <p-multiSelect
+              [options]="allCols"
+              onChange="getCols($event)"
+              [(ngModel)]="cols"
+              optionLabel="header"
+              class="c-inputCard-multiSelect"
+            ></p-multiSelect>
+            <p-button
+              label="新增欄位"
+              icon="pi pi-plus"
+              iconPos="left"
+              (click)="addcol.toggle($event)"
+            >
+            </p-button>
+            <p-overlayPanel #addcol [showCloseIcon]="true">
+              <ng-template pTemplate>
+                <input
+                  type="text"
+                  pInputText
+                  #formulaInput
+                  [(ngModel)]="header"
+                  style="width: 100%"
+                />
+                <button
+                  pButton
+                  type="button"
+                  label="確認"
+                  class="btn"
+                  (click)="addCustCol(); addcol.hide()"
+                ></button>
+              </ng-template>
+            </p-overlayPanel>
+          </div>
         </div>
-    </ng-template>
+      </ng-template>
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th *ngFor="let col of columns; let i = index">
@@ -79,7 +88,7 @@
                   <div style="margin: 10px 0">
                     <button
                       pButton
-                      class="btn"
+                      class="btn btn-secondary"
                       type="button"
                       label="全部展開"
                       (click)="expandAll()"
@@ -158,7 +167,7 @@
                       <button
                         pButton
                         class="btn p-button-secondary"
-                        style="background-color: #6db7bc;"
+                        style="background-color: #6db7bc"
                         type="button"
                         label="全部收起"
                         (click)="collapseAll()"
@@ -168,7 +177,7 @@
                       [value]="files2"
                       class="c-tree"
                       selectionMode="multiple"
-                      (onNodeSelect)="nodeSelect($event, colIdx,col.field)"
+                      (onNodeSelect)="nodeSelect($event, colIdx, col.field)"
                       (onNodeUnselect)="nodeUnselect($event)"
                     ></p-tree>
                     <button
@@ -192,16 +201,17 @@
           </td>
         </tr>
       </ng-template>
-      <ng-template pTemplate="footer" let-columns >
+      <ng-template pTemplate="footer" let-columns>
         <tr class="footer">
           <th *ngFor="let col of columns; let i = index">
             <div class="footer-item" *ngIf="checkType(col.field)">
               <p-dropdown
-              [options]="cities" [dataKey]="getColCalculate(col.field)"
-              (onChange)="setColCalculate($event,col.field)"
-              optionLabel="name"
-              optionValue="code"
-              class="total-select"
+                [options]="cities"
+                [dataKey]="getColCalculate(col.field)"
+                (onChange)="setColCalculate($event, col.field)"
+                optionLabel="name"
+                optionValue="code"
+                class="total-select"
               ></p-dropdown>
               <p class="t-hand-title">{{ footerSum(col.field) }}</p>
             </div>
