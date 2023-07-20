@@ -24,10 +24,15 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { NodeService } from 'src/nodeService';
 
 import {TreeModule} from 'primeng/tree';
+import { CproExcelComponent } from './cpro-excel/cpro-excel.component';
+import { DataTableComponent } from './data-table/data-table.component';
+import { CustomerService } from 'src/customerservice';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CproExcelComponent,
+    DataTableComponent
   ],
   imports: [
     AppRoutingModule,
@@ -51,7 +56,8 @@ import {TreeModule} from 'primeng/tree';
   ],
   providers: [ProductService,
     MessageService,
-    NodeService
+    NodeService,
+    CustomerService
   ],
   bootstrap: [AppComponent]
 })
