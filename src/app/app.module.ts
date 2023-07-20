@@ -27,12 +27,14 @@ import {TreeModule} from 'primeng/tree';
 import { CproExcelComponent } from './cpro-excel/cpro-excel.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { CustomerService } from 'src/customerservice';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CproExcelComponent,
-    DataTableComponent
+    DataTableComponent,
+    MainComponent
   ],
   imports: [
     AppRoutingModule,
