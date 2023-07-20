@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="table-freeze">
+    <p-table
+      [value]="customers"
+      scrollDirection="both"
+      [scrollable]="true"
+      scrollHeight="400px"
+      styleClass="p-mt-3,p-datatable-sm"
+      rowGroupMode="rowspan"
+      groupRowsBy="representative.name"
+      sortField="representative.name"
+      sortMode="single"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="min-width: 300px" pFrozenColumn>Name</th>
+          <th style="min-width: 300px" pFrozenColumn>Id</th>
+          <th>Country</th>
+          <th>Date</th>
+          <th>Country</th>
+          <th>Date</th>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="body"
+        let-customer
+        let-rowIndex="rowIndex"
+        let-rowgroup="rowgroup"
+        let-rowspan="rowspan"
+      >
+        <tr>
+          <td
+            *ngIf="rowgroup"
+            [attr.rowspan]="rowspan"
+            style="min-width: 300px"
+            pFrozenColumn
+          >
+            <span class="p-text-bold p-ml-2">{{ customer.name }}</span>
+          </td>
+          <td style="min-width: 300px" pFrozenColumn>{{ customer.name }}</td>
+          <td>
+            {{ customer.verified }}
+          </td>
+          <td>
+            <span class="image-text">{{ customer.country.name }}</span>
+          </td>
+          <td>
+            {{ customer.verified }}
+          </td>
+          <td>
+            <span class="image-text">{{ customer.country.name }}</span>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

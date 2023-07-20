@@ -3,6 +3,11 @@
   padding-bottom: 0 !important;
 }
 
+.container {
+  max-width: 1480px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
 .i {
   &-formula {
     width: 15px;
@@ -38,7 +43,7 @@
   }
 }
 
-.btn {
+.btn{
   background-color: rgb(106, 161, 228);
   margin-left: 10px;
   &:enabled:hover {

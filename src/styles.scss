@@ -9,7 +9,7 @@ body {
 }
 
 .p-dropdown-items-wrapper,
-body{
+body {
   &::-webkit-scrollbar {
     width: 7px;
   }
@@ -23,8 +23,11 @@ body{
     border-radius: 5px;
   }
 }
-
-
+.container {
+  max-width: 1480px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
 
 .c {
   &-tree {
@@ -50,8 +53,8 @@ body{
       width: 100%;
     }
   }
-  &-table{
-    &-header{
+  &-table {
+    &-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -68,6 +71,13 @@ body{
 
 .p-datatable-tbody {
   margin-bottom: 20px;
+  .ng-star-inserted{
+    &.input-formula{
+      background-color: #cfe1ff;
+      padding: 5px;
+      border-radius: 4px;
+    }
+  }
 }
 
 .total-select {
@@ -93,10 +103,17 @@ body{
 .footer {
   background: #f4f9fd;
   .ng-star-inserted {
-    padding: 10px 7px;
+    padding: 6px 7px;
   }
-  .t-hand-title{
+  .t-hand-title {
     text-align: left;
   }
 }
 
+
+.table{
+  &-freeze{
+    max-width: 800px;
+    margin: 20px auto;
+  }
+}
