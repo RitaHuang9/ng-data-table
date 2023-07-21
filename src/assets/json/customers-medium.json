@@ -2,57 +2,438 @@
   "data": [
     {
       "id": 1000,
-      "name": "Josephine Darakjy",
-      "country": {
-        "name": "Algeria",
-        "code": "dz"
+      "name": "Profit and Loss",
+      "company": "Contract Value(合約總價)",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "001",
+      "FC": {
+        "202209": 57890,
+        "202210": 51240,
+        "202211": 21240,
+        "202212": 21240
       },
-      "company": "Benton, John B Jr",
-      "date": "2015-09-13",
-      "status": "unqualified",
-      "verified": true,
-      "activity": 17,
-      "representative": {
-        "name": "Ioni Bowcher",
-        "image": "ionibowcher.png"
-      },
-      "balance": 70663
+      "editable": false
     },
     {
       "id": 1001,
-      "name": "Josephine Darakjy1",
-      "country": {
-        "name": "Egypt",
-        "code": "eg"
+      "name": "Profit and Loss",
+      "company": "Total contract cost(合約總成本)",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "001",
+      "FC": {
+        "202209": 27890,
+        "202210": 21240,
+        "202211": 21240,
+        "202212": 21240
       },
-      "company": "Chanay, Jeffrey A Esq",
-      "date": "2019-02-09",
-      "status": "proposal",
-      "verified": true,
-      "activity": 0,
-      "representative": {
-        "name": "Ioni Bowcher",
-        "image": "amyelsner.png"
-      },
-      "balance": 82429
+      "editable": false
     },
     {
-      "id": 1001,
-      "name": "Josephine Darakjy1",
-      "country": {
-        "name": "Egypt",
-        "code": "eg"
+      "id": 1002,
+      "name": "Profit and Loss",
+      "company": "Margin(總毛利)",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "001",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
       },
-      "company": "Chanay, Jeffrey A Esq",
-      "date": "2019-02-09",
-      "status": "proposal",
-      "verified": true,
-      "activity": 0,
-      "representative": {
-        "name": "Ioni Bowcher",
-        "image": "amyelsner.png"
+      "editable": false
+    },
+    {
+      "id": 2001,
+      "name": "Progress Claim",
+      "company": "Original Scope 估驗金額",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "002",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
       },
-      "balance": 82429
+      "editable": true
+    },
+    {
+      "id": 2002,
+      "name": "Progress Claim",
+      "company": "Original Scope 估驗金額 single period adj",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "002",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": false
+    },
+    {
+      "id": 2003,
+      "name": "Progress Claim",
+      "company": "Original Scope 估驗金額 FINAL",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "002",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": false
+    },
+    {
+      "id": 2004,
+      "name": "Progress Claim",
+      "company": "Variations 追加(減)金額",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "002",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": true
+    },
+    {
+      "id": 2005,
+      "name": "Progress Claim",
+      "company": "Variations 追加(減)金額 single period adj",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "002",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": false
+    },
+    {
+      "id": 2006,
+      "name": "Progress Claim",
+      "company": "CPF / Escalation 物調金額",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "002",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": true
+    },
+    {
+      "id": 2007,
+      "name": "Progress Claim",
+      "company": "CPF / Escalation 物調金額 single period adj",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "002",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": false
+    },
+    {
+      "id": 2008,
+      "name": "Progress Claim",
+      "company": "Advance Payment 預付款",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "002",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": true
+    },
+    {
+      "id": 2009,
+      "name": "Progress Claim",
+      "company": "Advance Payment 預付款 single period adj",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "002",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": false
+    },
+    {
+      "id": 2010,
+      "name": "Progress Claim",
+      "company": "Claims 求償金額",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "002",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": true
+    },
+    {
+      "id": 2011,
+      "name": "Progress Claim",
+      "company": "Claims 求償金額 single period adj",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "002",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": false
+    },
+    {
+      "id": 2012,
+      "name": "Progress Claim",
+      "company": "Provisional Items 保留項目",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "002",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": true
+    },
+    {
+      "id": 2013,
+      "name": "Progress Claim",
+      "company": "Provisional Items 保留項目 single period adj",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "002",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": false
+    },
+    {
+      "id": 2014,
+      "name": "Progress Claim",
+      "company": "Other 其他",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "002",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": true
+    },
+    {
+      "id": 2015,
+      "name": "Progress Claim",
+      "company": "Other 其他 single period adj",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "002",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": false
+    },
+    {
+      "id": 2016,
+      "name": "Progress Claim",
+      "company": "Subtotal",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "002",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": true
+    },
+    {
+      "id": 3001,
+      "name": "+/- Adjustments +/- 調整項目",
+      "company": "Under/(Over)billing 應收/(應付)建造合約款",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "003",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": true
+    },
+    {
+      "id": 3002,
+      "name": "+/- Adjustments +/- 調整項目",
+      "company": "Budget-to-date (Surpus)/Loss 收付權重價差",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "003",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": true
+    },
+    {
+      "id": 3003,
+      "name": "+/- Adjustments +/- 調整項目",
+      "company": "Other Income 其他收益",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "003",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": true
+    },
+    {
+      "id": 4001,
+      "name": "Profit and Loss工程損益",
+      "company": "Contract Revenue 工程收入",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "004",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": true
+    },
+    {
+      "id": 4002,
+      "name": "Profit and Loss工程損益",
+      "company": "Contract Revenue 工程成本",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "004",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": true
+    },
+    {
+      "id": 4003,
+      "name": "Profit and Loss工程損益",
+      "company": "Contract Margin 工程毛利",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "004",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": true
+    },
+    {
+      "id": 4004,
+      "name": "Profit and Loss工程損益",
+      "company": "POC completion 完工百分比",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "004",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": true
+    },
+    {
+      "id": 5001,
+      "name": "Profit and Loss工程損益 單期",
+      "company": "Contract Revenue 工程收入",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "005",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": true
+    },
+    {
+      "id": 5002,
+      "name": "Profit and Loss工程損益 單期",
+      "company": "Contract Revenue 工程成本",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "005",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": false
+    },
+    {
+      "id": 5003,
+      "name": "Profit and Loss工程損益 單期",
+      "company": "Contract Margin 工程毛利",
+      "lastend": "",
+      "thisyear": "",
+      "group":  "005",
+      "FC": {
+        "202209": 56830,
+        "202210": 26240,
+        "202211": 21240,
+        "202212": 21240
+      },
+      "editable": true
     }
   ]
 }

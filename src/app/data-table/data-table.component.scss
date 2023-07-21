@@ -59,3 +59,11 @@
     }
   }
 }
+
+// 套件
+:host ::ng-deep{
+  .p-datatable .p-datatable-tbody > tr > td{
+    padding: 10px;
+  }
+}
+

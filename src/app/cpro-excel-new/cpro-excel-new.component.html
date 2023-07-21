@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="table-freeze">
+    <p-table
+      [value]="customers"
+      scrollDirection="both"
+      editMode="row"
+      [scrollable]="true"
+      scrollHeight="400px"
+      styleClass="p-mt-3,p-datatable-sm"
+    >
+      <ng-template pTemplate="header" let-customer>
+        <tr>
+          <th style="min-width: 100px">A</th>
+          <th style="min-width: 100px">B</th>
+          <th>C</th>
+          <th>D</th>
+          <th>E</th>
+          <th>F</th>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="body"
+        let-customer
+        let-editing="editing"
+        let-i="index"
+      >
+        <tr>
+          <td pEditableColumn *ngFor="let column of customer.coldata">
+            <ng-container *ngIf="customer.editable && column.editable">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="column.value" />
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{ column.value }}
+                </ng-template>
+              </p-cellEditor>
+            </ng-container>
+            <ng-container *ngIf="!customer.editable || !column.editable">
+              <span class="p-text-bold p-ml-2">{{ column.value }}
+              </span>
+            </ng-container>
+          </td>
+          <!-- <td
+            *ngIf="rowgroup"
+            [attr.rowspan]="rowspan"
+            style="min-width: 200px"
+            pFrozenColumn
+          >
+            <span class="p-text-bold p-ml-2"
+              >{{row}}</span
+            >
+          </td> -->
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

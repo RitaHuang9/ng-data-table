@@ -71,8 +71,8 @@ body {
 
 .p-datatable-tbody {
   margin-bottom: 20px;
-  .ng-star-inserted{
-    &.input-formula{
+  .ng-star-inserted {
+    &.input-formula {
       background-color: #cfe1ff;
       padding: 5px;
       border-radius: 4px;
@@ -110,10 +110,9 @@ body {
   }
 }
 
-
-.table{
-  &-freeze{
-    max-width: 800px;
+.table {
+  &-freeze {
+    // max-width: 1000px;
     margin: 20px auto;
   }
 }

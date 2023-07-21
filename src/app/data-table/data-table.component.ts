@@ -489,7 +489,7 @@ export class DataTableComponent implements OnInit {
     );
   }
 
-  // onRowEditInit(product: Product) {
-  //   this.clonedProducts[product.id] = { ...product };
-  // }
+  onRowEditInit(product: Product) {
+    this.clonedProducts[product.id] = { ...product };
+  }
 }
