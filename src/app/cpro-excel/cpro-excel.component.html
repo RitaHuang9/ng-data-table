@@ -8,6 +8,7 @@
     >
       <img alt="dropdown icon" class="i-formula" src="../assets/formula.png" />
     </button>
+
     <p-overlayPanel #op [showCloseIcon]="true">
       <ng-template pTemplate>
         <!-- 收合按鈕 -->
@@ -43,8 +44,9 @@
         ></button>
       </ng-template>
     </p-overlayPanel>
-    <input type="text" #formulaInput pInputText style="width: 100%" />
+    <input type="text" #formulaInput pInputText style="width: 100%" [value]="getEditFormula()"  (change)="saveFormula($event)"/>
   </div>
+
   <div class="table-freeze">
     <p-table
       [value]="customers"
@@ -89,6 +91,7 @@
             <!--  金額類別  -->
             <td style="min-width: 300px;" pFrozenColumn>
               {{ customer.company }}
+              <img  *ngIf="!customer.editable" width="15px" alt="dropdown icon" class="i-formula" src="../assets/formula.png"  (click)="setEditFormula(customer.company)"/>
             </td>
 
           <!-- Accumulated to last FY end  -->
@@ -144,6 +147,7 @@
                     pInputText
                     type="text"
                     [value]="resolveField(customer.FC,col)"
+                    (change)="assign(customer.FC, col ,$event)"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
@@ -155,7 +159,7 @@
           <ng-container *ngIf="!customer.editable">
             <td pEditableColumn style="min-width: 100px" (click)="getData(customer,$event)" *ngFor="let col of fcCols" >
               <span class="p-text-bold p-ml-2"
-                >{{ resolveField(customer.FC,col) }}
+                >{{ calc(customer,col) }}
               </span>
             </td>
           </ng-container>

@@ -21,7 +21,12 @@ export class CproExcelComponent implements OnInit {
   files2!: TreeNode[];
   selectedFiles1!: TreeNode;
   // 動態FC欄位
-  fcCols!: unknown[];
+  fcCols!: string[];
+   // 動態欄位
+  dyncCols = new Map();
+  // 動態公式欄位
+  formulaCols = new Map();
+  editFormula:string = "";
 
   constructor(
     private customerService: CustomerService,
@@ -31,20 +36,60 @@ export class CproExcelComponent implements OnInit {
   ngOnInit() {
     this.customerService.getCustomersMedium().then((data) => {
       this.customers = data;
-      //暫存動態FC欄位
-      let tempKeys: unknown[] = [];
-      //取得各筆Customer有幾筆FC欄位
-      this.customers.forEach((x) => {
-        const keys = x.FC ? Object.keys(x.FC) : [];
-        //合併動態FC,並去除重覆項
-        tempKeys= this.merge(tempKeys ,keys);
-      });
-      this.fcCols = tempKeys;
+      this.getDynaFCCol();
+      this.getDynaCalcCol();
     });
 
     this.nodeService.getFiles().then((files) => {
       this.files2 = files;
+
+      console.table(this.files2);
+      let cols:any[] = [];
+      this.dyncCols.forEach(x => {
+        cols.push(x);
+      })
+      console.table(cols);
+
+      this.files2[0].children = cols;
     });
+  }
+
+  // 取得動態的FC欄位
+  getDynaFCCol() {
+    //暫存動態FC欄位
+    let tempKeys: string[] = [];
+    //取得各筆Customer有幾筆FC欄位
+    this.customers.forEach((x) => {
+      const keys = x.FC ? Object.keys(x.FC) : [];
+      //合併動態FC,並去除重覆項
+      tempKeys = this.merge(tempKeys, keys);
+    });
+    this.fcCols = tempKeys;
+  }
+
+  // 取得動態需要設定公式的欄位
+  getDynaCalcCol() {
+    //取得各筆Customer有幾筆FC欄位
+    this.customers.forEach((x) => {
+      if (x.company) {
+
+        this.dyncCols.set(x.company, {
+          label: x.company,
+          value: `[[${x.company}]]`,
+          data: "Work Folder",
+          expandedIcon: "",
+          collapsedIcon: "",
+          leaf: true
+        });
+
+        //不可編輯的rows才可以設定公式
+        if (!x.editable) {
+          this.formulaCols.set(x.company,"");
+        }
+      }
+    });
+    console.table(this.dyncCols);
+    console.table(this.formulaCols);
   }
 
   getData(customer: any, event: any) {
@@ -81,7 +126,7 @@ export class CproExcelComponent implements OnInit {
   //點選公式 並加入至input
   nodeSelect(event: any) {
     if (event.node.leaf) {
-      const addFormula = event.node.label;
+      const addFormula = event.node.value ? event.node.value :event.node.label;
       const value = this.formulaInput.nativeElement.value;
 
       const newValue =
@@ -95,8 +140,8 @@ export class CproExcelComponent implements OnInit {
     }
   }
 
-  merge(arr1: unknown[], arr2: unknown[]) {
-    const newArr: unknown[] = [...arr1];
+  merge(arr1: string[], arr2: string[]) {
+    const newArr: string[] = [...arr1];
     for (let i = 0; i < arr2.length; i++) {
       const item = arr2[i];
       if (newArr.includes(item)) continue;
@@ -105,10 +150,44 @@ export class CproExcelComponent implements OnInit {
     return newArr;
   }
 
+  //get Object Value by property
   resolveField(data: any, field: any): any {
     type ObjectKey = keyof typeof data;
 
     const myVar = field as ObjectKey;
     return data[myVar];
   }
+
+  //set Object Value by property
+  assign<T extends object, K extends keyof T>(obj: T, key: K, val: any) {
+    obj[key] = val.target.value; // okay
+  }
+
+  setEditFormula(key:string)
+  {
+    this.editFormula = key;
+    console.log(this.editFormula)
+  }
+
+  getEditFormula()
+  {
+    if(this.editFormula )
+      return  this.formulaCols.get( this.editFormula);
+    else
+      return "";
+  }
+
+  saveFormula(event:any)
+  {
+    if(this.editFormula )
+      this.formulaCols.set( this.editFormula,event.target.value);
+
+      console.table(this.formulaCols)
+  }
+
+    //get Object Value by property
+    calc(data: any, field: any): any {
+
+      return  this.formulaCols.get(data.company);
+    }
 }
