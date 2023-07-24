@@ -5,6 +5,8 @@ import { NodeService } from 'src/nodeService';
 import { TreeNode } from 'primeng/api';
 import { OverlayPanel } from 'primeng/overlaypanel';
 
+
+
 @Component({
   selector: 'app-cpro-excel',
   templateUrl: './cpro-excel.component.html',
@@ -18,23 +20,28 @@ export class CproExcelComponent implements OnInit {
   balanceFrozen: boolean = false;
 
 
-
-
   // 公式選擇樹狀圖
   files2!: TreeNode[];
   selectedFiles1!: TreeNode;
 
-  constructor(private customerService: CustomerService,
-    private nodeService: NodeService) {}
+  constructor(
+    private customerService: CustomerService,
+    private nodeService: NodeService
+  ) {}
 
   ngOnInit() {
     this.customerService.getCustomersMedium().then((data) => {
       this.customers = data;
+
     });
 
     this.nodeService.getFiles().then((files) => {
       this.files2 = files;
     });
+  }
+
+  getData(customer: any, event: any) {
+    console.log(customer);
   }
 
   // 公式樹狀圖-全部展開
@@ -59,7 +66,6 @@ export class CproExcelComponent implements OnInit {
     }
   }
 
-
   // 取得input游標 caret 位置
   checkCaretPosition() {
     return this.formulaInput.nativeElement.selectionStart;
@@ -67,10 +73,9 @@ export class CproExcelComponent implements OnInit {
 
   //點選公式 並加入至input
   nodeSelect(event: any) {
-
     if (event.node.leaf) {
       const addFormula = event.node.label;
-      const value = this.formulaInput.nativeElement.value ;
+      const value = this.formulaInput.nativeElement.value;
 
       const newValue =
         //找caret前面的值
@@ -79,9 +84,7 @@ export class CproExcelComponent implements OnInit {
         //找後面的值
         value.slice(Number(this.checkCaretPosition()));
 
-        this.formulaInput.nativeElement.value = newValue;
-
+      this.formulaInput.nativeElement.value = newValue;
     }
   }
 }
-

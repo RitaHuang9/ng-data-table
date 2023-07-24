@@ -50,7 +50,7 @@
       [value]="customers"
       scrollDirection="both"
       [scrollable]="true"
-      scrollHeight="calc(100vh - 10px)"
+      scrollHeight="calc(100vh - 100px)"
       styleClass="p-mt-3 p-datatable-sm"
       rowGroupMode="rowspan"
       groupRowsBy="group"
@@ -141,7 +141,7 @@
           </ng-container>
           <!-- 202209 -->
           <ng-container *ngIf="customer.editable">
-            <td pEditableColumn style="background: #cae9d5; min-width: 100px;">
+            <td pEditableColumn style="background: #cae9d5; min-width: 100px;" (click)="getData(customer,$event)">
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input
@@ -157,7 +157,7 @@
             </td>
           </ng-container>
           <ng-container *ngIf="!customer.editable">
-            <td pEditableColumn style="min-width: 100px">
+            <td pEditableColumn style="min-width: 100px" (click)="getData(customer,$event)">
               <span class="p-text-bold p-ml-2"
                 >{{ customer.FC["202209"] }}
               </span>
