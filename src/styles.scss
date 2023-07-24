@@ -6,12 +6,15 @@ body {
   font-family: var(--font-family);
   margin: 0;
   background-color: #ecf0f3;
+  overflow: hidden;
 }
 
 .p-dropdown-items-wrapper,
+.p-datatable-wrapper,
 body {
   &::-webkit-scrollbar {
     width: 7px;
+    height: 7px;
   }
 
   &::-webkit-scrollbar-track {
@@ -19,13 +22,13 @@ body {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #a6b7d3;
+    background-color: #cccccc;
     border-radius: 5px;
   }
 }
 .container {
   max-width: 1480px;
-  padding: 0 20px;
+  // padding: 0 20px;
   margin: 0 auto;
 }
 
@@ -111,8 +114,20 @@ body {
 }
 
 .table {
-  &-freeze {
-    // max-width: 1000px;
-    margin: 20px auto;
+  &-freeze{
+    // max-width: 1250px;
+    margin: 0px auto;
+    .p-datatable-sm{
+      .p-datatable-tbody{
+        tr:not(:nth-child(1)):not(:nth-child(4)):not(:nth-child(20)):not(:nth-child(23)):not(:nth-child(27))
+      {
+        td:nth-child(1) {
+          left: 200px !important;
+          position: sticky;
+        }
+      }
+      }
+    }
   }
 }
+

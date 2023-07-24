@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="formula-box">
+  <div class="formula-box" >
     <button
       type="text"
       class="btn btn-formula"
@@ -50,7 +50,7 @@
       [value]="customers"
       scrollDirection="both"
       [scrollable]="true"
-      scrollHeight="calc(100vh - 100px)"
+      scrollHeight="calc(100vh - 10px)"
       styleClass="p-mt-3 p-datatable-sm"
       rowGroupMode="rowspan"
       groupRowsBy="group"
@@ -58,14 +58,17 @@
     >
       <ng-template pTemplate="header">
         <tr>
-          <th style="min-width: 150px" pFrozenColumn>項目</th>
-          <th style="min-width: 200px" pFrozenColumn>金額類別</th>
-          <th>Accumulated to last FY end</th>
-          <th>This year</th>
-          <th>202209</th>
-          <th>202210</th>
-          <th>202211</th>
-          <th>202212</th>
+          <th style="min-width: 200px" pFrozenColumn>項目</th>
+          <th style="min-width: 300px" pFrozenColumn>金額類別</th>
+          <th style="min-width: 150px">Accumulated to last FY end</th>
+          <th style="min-width: 100px">This year</th>
+          <th style="min-width: 100px">202209</th>
+          <th style="min-width: 100px">202210</th>
+          <th style="min-width: 100px">202211</th>
+          <th style="min-width: 100px">202212</th>
+          <th style="min-width: 100px">202301</th>
+          <th style="min-width: 100px">202302</th>
+          <th style="min-width: 100px">202303</th>
         </tr>
       </ng-template>
       <ng-template
@@ -77,23 +80,24 @@
         let-rowspan="rowspan"
       >
         <tr>
-          <!-- 項目  -->
-          <td
-            *ngIf="rowgroup"
-            [attr.rowspan]="rowspan"
-            style="min-width: 150px;"
-            pFrozenColumn
-          >
-            <span class="p-text-bold p-ml-2">{{ customer.name }} </span>
-          </td>
-          <!--  金額類別  -->
-          <td style="min-width: 200px; left: 274px !important;"  pFrozenColumn>
 
-            {{ customer.company }}
-          </td>
+            <!-- 項目  -->
+            <td
+              *ngIf="rowgroup"
+              [attr.rowspan]="rowspan"
+              style="min-width: 200px"
+              pFrozenColumn
+            >
+              <span class="p-text-bold p-ml-2">{{ customer.name }} </span>
+            </td>
+            <!--  金額類別  -->
+            <td style="min-width: 300px;" pFrozenColumn>
+              {{ customer.company }}
+            </td>
+
           <!-- Accumulated to last FY end  -->
           <ng-container *ngIf="customer.editable">
-            <td pEditableColumn style="background: #cae9d5">
+            <td pEditableColumn style="background: #cae9d5; min-width: 150px;">
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input
@@ -109,13 +113,13 @@
             </td>
           </ng-container>
           <ng-container *ngIf="!customer.editable">
-            <td pEditableColumn>
+            <td pEditableColumn style="min-width: 150px">
               <span class="p-text-bold p-ml-2">{{ customer.lastend }} </span>
             </td>
           </ng-container>
           <!-- This year -->
           <ng-container *ngIf="customer.editable">
-            <td pEditableColumn style="background: #cae9d5">
+            <td pEditableColumn style="background: #cae9d5 ;min-width: 150px">
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input
@@ -131,13 +135,13 @@
             </td>
           </ng-container>
           <ng-container *ngIf="!customer.editable">
-            <td pEditableColumn>
+            <td pEditableColumn style="min-width: 150px">
               <span class="p-text-bold p-ml-2">{{ customer.thisyear }} </span>
             </td>
           </ng-container>
           <!-- 202209 -->
           <ng-container *ngIf="customer.editable">
-            <td pEditableColumn style="background: #cae9d5">
+            <td pEditableColumn style="background: #cae9d5; min-width: 100px;">
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input
@@ -153,7 +157,7 @@
             </td>
           </ng-container>
           <ng-container *ngIf="!customer.editable">
-            <td pEditableColumn>
+            <td pEditableColumn style="min-width: 100px">
               <span class="p-text-bold p-ml-2"
                 >{{ customer.FC["202209"] }}
               </span>
@@ -161,7 +165,7 @@
           </ng-container>
           <!-- 202210 -->
           <ng-container *ngIf="customer.editable">
-            <td pEditableColumn style="background: #cae9d5">
+            <td pEditableColumn style="background: #cae9d5; min-width: 100px;">
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input
@@ -177,7 +181,7 @@
             </td>
           </ng-container>
           <ng-container *ngIf="!customer.editable">
-            <td pEditableColumn>
+            <td pEditableColumn style="min-width: 100px">
               <span class="p-text-bold p-ml-2"
                 >{{ customer.FC["202210"] }}
               </span>
@@ -185,7 +189,7 @@
           </ng-container>
           <!-- 202211 -->
           <ng-container *ngIf="customer.editable">
-            <td pEditableColumn style="background: #cae9d5">
+            <td pEditableColumn style="background: #cae9d5; min-width: 100px;">
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input
@@ -201,7 +205,7 @@
             </td>
           </ng-container>
           <ng-container *ngIf="!customer.editable">
-            <td pEditableColumn>
+            <td pEditableColumn style="min-width: 100px">
               <span class="p-text-bold p-ml-2"
                 >{{ customer.FC["202211"] }}
               </span>
@@ -209,7 +213,7 @@
           </ng-container>
           <!-- 202212 -->
           <ng-container *ngIf="customer.editable">
-            <td pEditableColumn style="background: #cae9d5">
+            <td pEditableColumn style="background: #cae9d5; min-width: 100px;">
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input
@@ -225,9 +229,81 @@
             </td>
           </ng-container>
           <ng-container *ngIf="!customer.editable">
-            <td pEditableColumn>
+            <td pEditableColumn style="min-width: 100px">
               <span class="p-text-bold p-ml-2"
                 >{{ customer.FC["202212"] }}
+              </span>
+            </td>
+          </ng-container>
+          <!-- 202301 -->
+          <ng-container *ngIf="customer.editable">
+            <td pEditableColumn style="background: #cae9d5; min-width: 100px;">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input
+                    pInputText
+                    type="text"
+                    [(ngModel)]="customer.FC['202301']"
+                  />
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{ customer.FC["202301"] }}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="!customer.editable">
+            <td pEditableColumn style="min-width: 100px">
+              <span class="p-text-bold p-ml-2"
+                >{{ customer.FC["202301"] }}
+              </span>
+            </td>
+          </ng-container>
+          <!-- 202302 -->
+          <ng-container *ngIf="customer.editable">
+            <td pEditableColumn style="background: #cae9d5; min-width: 100px;">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input
+                    pInputText
+                    type="text"
+                    [(ngModel)]="customer.FC['202302']"
+                  />
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{ customer.FC["202302"] }}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="!customer.editable">
+            <td pEditableColumn style="min-width: 100px">
+              <span class="p-text-bold p-ml-2"
+                >{{ customer.FC["202302"] }}
+              </span>
+            </td>
+          </ng-container>
+          <!-- 202303 -->
+          <ng-container *ngIf="customer.editable">
+            <td pEditableColumn style="background: #cae9d5; min-width: 100px;">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input
+                    pInputText
+                    type="text"
+                    [(ngModel)]="customer.FC['202303']"
+                  />
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{ customer.FC["202303"] }}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="!customer.editable">
+            <td pEditableColumn style="min-width: 100px">
+              <span class="p-text-bold p-ml-2"
+                >{{ customer.FC["202303"] }}
               </span>
             </td>
           </ng-container>
