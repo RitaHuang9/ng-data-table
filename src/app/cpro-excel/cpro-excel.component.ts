@@ -5,8 +5,6 @@ import { NodeService } from 'src/nodeService';
 import { TreeNode } from 'primeng/api';
 import { OverlayPanel } from 'primeng/overlaypanel';
 
-
-
 @Component({
   selector: 'app-cpro-excel',
   templateUrl: './cpro-excel.component.html',
@@ -19,10 +17,11 @@ export class CproExcelComponent implements OnInit {
   customers!: Customer[];
   balanceFrozen: boolean = false;
 
-
   // 公式選擇樹狀圖
   files2!: TreeNode[];
   selectedFiles1!: TreeNode;
+  // 動態FC欄位
+  fcCols!: unknown[];
 
   constructor(
     private customerService: CustomerService,
@@ -32,7 +31,15 @@ export class CproExcelComponent implements OnInit {
   ngOnInit() {
     this.customerService.getCustomersMedium().then((data) => {
       this.customers = data;
-
+      //暫存動態FC欄位
+      let tempKeys: unknown[] = [];
+      //取得各筆Customer有幾筆FC欄位
+      this.customers.forEach((x) => {
+        const keys = x.FC ? Object.keys(x.FC) : [];
+        //合併動態FC,並去除重覆項
+        tempKeys= this.merge(tempKeys ,keys);
+      });
+      this.fcCols = tempKeys;
     });
 
     this.nodeService.getFiles().then((files) => {
@@ -86,5 +93,22 @@ export class CproExcelComponent implements OnInit {
 
       this.formulaInput.nativeElement.value = newValue;
     }
+  }
+
+  merge(arr1: unknown[], arr2: unknown[]) {
+    const newArr: unknown[] = [...arr1];
+    for (let i = 0; i < arr2.length; i++) {
+      const item = arr2[i];
+      if (newArr.includes(item)) continue;
+      newArr.push(item);
+    }
+    return newArr;
+  }
+
+  resolveField(data: any, field: any): any {
+    type ObjectKey = keyof typeof data;
+
+    const myVar = field as ObjectKey;
+    return data[myVar];
   }
 }
