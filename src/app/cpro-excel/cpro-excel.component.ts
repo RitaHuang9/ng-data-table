@@ -134,9 +134,7 @@ export class CproExcelComponent implements OnInit {
     console.table(this.formulaCols);
   }
 
-  getData(customer: any, event: any) {
-    console.log(customer);
-  }
+
 
   // 公式樹狀圖-全部展開
   expandAll() {

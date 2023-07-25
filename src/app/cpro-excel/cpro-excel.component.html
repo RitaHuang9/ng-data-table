@@ -120,7 +120,7 @@
 
           <!-- Accumulated to last FY end  -->
           <ng-container *ngIf="customer.editable">
-            <td pEditableColumn style="background: #cae9d5; min-width: 150px;">
+            <td pEditableColumn style="min-width: 150px;" class="editable">
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input
@@ -142,7 +142,7 @@
           </ng-container>
           <!-- This year -->
           <ng-container *ngIf="customer.editable">
-            <td pEditableColumn style="background: #cae9d5 ;min-width: 150px">
+            <td pEditableColumn style="min-width: 150px;" class="editable">
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input
@@ -164,7 +164,7 @@
           </ng-container>
           <!-- 202209 -->
           <ng-container *ngIf="customer.editable">
-            <td pEditableColumn style="background: #cae9d5; min-width: 100px;" (click)="getData(customer,$event)" *ngFor="let col of fcCols" >
+            <td pEditableColumn style="min-width: 100px;" class="editable" *ngFor="let col of fcCols" >
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input
@@ -181,7 +181,7 @@
             </td>
           </ng-container>
           <ng-container *ngIf="!customer.editable">
-            <td pEditableColumn style="min-width: 100px" (click)="getData(customer,$event)" *ngFor="let col of fcCols" >
+            <td pEditableColumn style="min-width: 100px"  *ngFor="let col of fcCols" >
               <span class="p-text-bold p-ml-2"
                 >{{ calc(customer,col) }}
               </span>
