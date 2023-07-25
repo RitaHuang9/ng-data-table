@@ -5,6 +5,19 @@ import { NodeService } from 'src/nodeService';
 import { TreeNode } from 'primeng/api';
 import { OverlayPanel } from 'primeng/overlaypanel';
 
+
+
+interface Version {
+  name: string;
+}
+interface Project {
+  name: string;
+}
+interface CproVersion {
+  name: string;
+}
+
+
 @Component({
   selector: 'app-cpro-excel',
   templateUrl: './cpro-excel.component.html',
@@ -27,6 +40,16 @@ export class CproExcelComponent implements OnInit {
   // 動態公式欄位
   formulaCols = new Map();
   editFormula:string = "";
+
+  // header 下拉
+  versions: Version[] | undefined;
+  selectedVersion: Version | undefined;
+  projects: Project[] | undefined;
+  selectedProject: Project | undefined;
+  cproVersions: CproVersion[] | undefined;
+  selectedCproVersion: CproVersion | undefined;
+
+
 
   constructor(
     private customerService: CustomerService,
@@ -52,6 +75,25 @@ export class CproExcelComponent implements OnInit {
 
       this.files2[0].children = cols;
     });
+
+    this.versions = [
+      { name: '202209' },
+      { name: '202210' },
+      { name: '202211' },
+      { name: '202212' },
+  ];
+    this.projects = [
+      { name: 'project1' },
+      { name: 'project2' },
+      { name: 'project3' },
+      { name: 'project4' },
+  ];
+    this.cproVersions = [
+      { name: 'CPRO  version1' },
+      { name: 'CPRO  version2' },
+      { name: 'CPRO  version3' },
+      { name: 'CPRO  version4' },
+  ];
   }
 
   // 取得動態的FC欄位

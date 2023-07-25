@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="formula-box" >
+  <div class="formula-box" style="display: none;">
     <button
       type="text"
       class="btn btn-formula"
@@ -46,7 +46,31 @@
     </p-overlayPanel>
     <input type="text" #formulaInput pInputText style="width: 100%" [value]="getEditFormula()"  (change)="saveFormula($event)"/>
   </div>
+  <div class="header">
+    <h2 class="title">Flexible Forecast</h2>
+    <div>
+      <p-dropdown
+        [options]="versions"
+        [(ngModel)]="selectedVersion"
+        optionLabel="name"
+        placeholder="Version"
+      ></p-dropdown>
+      <p-dropdown
+        [options]="projects"
+        [(ngModel)]="selectedProject"
+        optionLabel="name"
+        placeholder="Project"
+      ></p-dropdown>
 
+      <p-dropdown
+        [options]="cproVersions"
+        [(ngModel)]="selectedCproVersion"
+        optionLabel="name"
+        placeholder="CPRO Version"
+      ></p-dropdown>
+      <input type="text" pInputText placeholder="CPRO version name" />
+    </div>
+  </div>
   <div class="table-freeze">
     <p-table
       [value]="customers"
