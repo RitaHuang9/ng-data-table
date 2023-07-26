@@ -37,24 +37,24 @@
 
       <p-overlayPanel #op [showCloseIcon]="true">
         <ng-template pTemplate>
-          <!-- 收合按鈕 -->
-          <div style="margin: 10px 0">
+          <!-- 基本公式 -->
+          <!-- <div style="margin: 10px 0">
             <button
               pButton
               class="btn btn-secondary"
               type="button"
-              label="全部展開"
-              (click)="expandAll()"
+              label="+"
+              (click)="nodeSelect($event,'+')"
               style="margin-left: 0"
             ></button>
             <button
               pButton
               class="btn"
               type="button"
-              label="全部收起"
-              (click)="collapseAll()"
+              label="-"
+              (click)="nodeSelect($event,'-')"
             ></button>
-          </div>
+          </div> -->
           <p-tree
             [value]="files2"
             class="c-tree"
@@ -104,7 +104,6 @@
         let-rowspan="rowspan"
       >
         <tr>
-
             <!-- 項目  -->
             <td
               *ngIf="rowgroup"
@@ -115,11 +114,14 @@
               <span class="p-text-bold p-ml-2">{{ customer.name }} </span>
             </td>
             <!--  金額類別  -->
-            <td style="min-width: 300px;" pFrozenColumn >
-              <div class="formula-feild">
-                <span>{{ customer.company }}</span>
+            <td style="min-width: 300px;" pFrozenColumn
+            [ngClass]="{'focus': this.editFormula === customer.company && this.editTitle === customer.name}"
+            >
+              <div class="formula-feild" >
+                <span>{{ customer.company }}
+                </span>
 
-              <img  *ngIf="!customer.editable" width="25px" height="25px" alt="dropdown icon" class="i-formula " src="../assets/formula.png"  (click)="setEditFormula(customer.company)"/>
+              <img  *ngIf="!customer.editable" width="25px" height="25px" alt="dropdown icon" class="i-formula " src="../assets/formula.png"  (click)="setEditFormula(customer.company,customer.name)"/>
               </div>
             </td>
 
@@ -176,7 +178,7 @@
                     pInputText
                     type="text"
                     [value]="resolveField(customer.FC,col)"
-                    (change)="assign(customer.FC, col ,$event)"
+                    (input)="assign(customer.FC, col ,$event)"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">

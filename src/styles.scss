@@ -153,6 +153,10 @@ body {
     margin: 0px auto;
     .p-datatable-sm {
       .p-datatable-tbody {
+        .focus{
+          border: 2px solid #eebd49;
+          background-color:  #fdf8ee;
+        }
         .editable {
           background: #cae9d575;
         }

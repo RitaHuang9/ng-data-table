@@ -39,6 +39,7 @@ export class CproExcelComponent implements OnInit {
   // 動態公式欄位
   formulaCols = new Map();
   editFormula: string = '';
+  editTitle: string = '';
 
   // header 下拉
   versions: Version[] | undefined;
@@ -158,8 +159,8 @@ export class CproExcelComponent implements OnInit {
   //點選公式 並加入至input
   nodeSelect(event: any) {
     if (event.node.leaf) {
-      const addFormula = event.node.value ? event.node.value : event.node.label;
-      const value = this.formulaInput.nativeElement.value;
+      const addFormula = event.node.value ;
+    const value = this.formulaInput.nativeElement.value;
 
       const newValue =
         //找caret前面的值
@@ -195,9 +196,9 @@ export class CproExcelComponent implements OnInit {
     obj[key] = val.target.value; // okay
   }
 
-  setEditFormula(key: string) {
+  setEditFormula(key: string, n:string) {
     this.editFormula = key;
-    console.log(this.editFormula);
+    this.editTitle = n;
   }
 
   getEditFormula() {
@@ -208,8 +209,6 @@ export class CproExcelComponent implements OnInit {
   saveFormula(event: any) {
     if (this.editFormula)
       this.formulaCols.set(this.editFormula, event.target.value);
-
-    console.table(this.formulaCols);
   }
 
   //get Object Value by property
@@ -269,30 +268,4 @@ export class CproExcelComponent implements OnInit {
     }
     // return this.formulaCols.get(data.company);
   }
-  // [[POC completion 完工百分比]]
-  // [[Contract Margin 工程毛利]]
-  // [[Contract Revenue 工程成本]]
-  // [[Contract Revenue 工程收入]]
-  // [[Other Income 其他收益]]
-  // [[Budget-to-date (Surpus)/Loss 收付權重價差]]
-  // [[Under/(Over)billing 應收/(應付)建造合約款]]
-  // [[Subtotal]]
-  // [[Other 其他 single period adj]]
-  // [[Other 其他]]
-  // [[Provisional Items 保留項目 single period adj]]
-  // [[Provisional Items 保留項目]]
-  // [[Claims 求償金額 single period adj]]
-  // [[Claims 求償金額]]
-  // [[Advance Payment 預付款 single period adj]]
-  // [[Advance Payment 預付款]]
-  // [[CPF / Escalation 物調金額 single period adj]]
-  // [[CPF / Escalation 物調金額]]
-  // [[Variations 追加(減)金額 single period adj]]
-  // [[Variations 追加(減)金額]]
-  // [[Original Scope 估驗金額 FINAL]]
-  // [[Original Scope 估驗金額 single period adj]]
-  // [[Original Scope 估驗金額]]
-  // [[Total contract cost(合約總成本)]]
-  // [[Contract Value(合約總價)]]
-  // [[Margin(總毛利)]]
 }
