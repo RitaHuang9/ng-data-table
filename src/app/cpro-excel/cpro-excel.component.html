@@ -1,12 +1,12 @@
 <div class="container">
-
   <div class="header">
     <div class="header-top">
       <h2 class="title">Flexible Forecast</h2>
       <div class="header-box">
         <p-dropdown
-          [options]="versions"
-          [(ngModel)]="selectedVersion"
+          [options]="version"
+          [(ngModel)]="formulaCols"
+          optionValue="formulas"
           optionLabel="name"
           placeholder="Version"
         ></p-dropdown>
@@ -32,34 +32,66 @@
         pButton
         (click)="op.toggle($event)"
       >
-        <img alt="dropdown icon" class="i-formula" src="../assets/formula.png" />
+        <img
+          alt="dropdown icon"
+          class="i-formula"
+          src="../assets/formula.png"
+        />
       </button>
 
       <p-overlayPanel #op [showCloseIcon]="true">
         <ng-template pTemplate>
           <!-- 基本公式 -->
-          <!-- <div style="margin: 10px 0">
+          <div style="margin: 25px 0 0 0">
             <button
               pButton
               class="btn btn-secondary"
               type="button"
               label="+"
-              (click)="nodeSelect($event,'+')"
+              (click)="nodeSelect($event, '+')"
               style="margin-left: 0"
             ></button>
             <button
               pButton
-              class="btn"
+              class="btn btn-secondary"
               type="button"
               label="-"
-              (click)="nodeSelect($event,'-')"
+              (click)="nodeSelect($event, '-')"
             ></button>
-          </div> -->
+            <button
+              pButton
+              class="btn btn-secondary"
+              type="button"
+              label="*"
+              (click)="nodeSelect($event, '*')"
+            ></button>
+            <button
+              pButton
+              class="btn btn-secondary"
+              type="button"
+              label="/"
+              (click)="nodeSelect($event, '/')"
+            ></button>
+            <button
+              pButton
+              class="btn btn-secondary"
+              type="button"
+              label="("
+              (click)="nodeSelect($event, '(')"
+            ></button>
+            <button
+              pButton
+              class="btn btn-secondary"
+              type="button"
+              label=")"
+              (click)="nodeSelect($event, ')')"
+            ></button>
+          </div>
           <p-tree
             [value]="files2"
             class="c-tree"
             selectionMode="multiple"
-            (onNodeSelect)="nodeSelect($event)"
+            (onNodeSelect)="nodeSelect($event, 'tree')"
           ></p-tree>
           <button
             pButton
@@ -70,7 +102,14 @@
           ></button>
         </ng-template>
       </p-overlayPanel>
-      <input type="text" #formulaInput pInputText style="width: 100%" [value]="getEditFormula()"  (change)="saveFormula($event)"/>
+      <input
+        type="text"
+        #formulaInput
+        pInputText
+        style="width: 100%"
+        [value]="getEditFormula()"
+        (change)="saveFormula($event)"
+      />
     </div>
   </div>
   <div class="table-freeze">
@@ -91,7 +130,7 @@
           <th style="min-width: 150px">Accumulated to last FY end</th>
           <th style="min-width: 100px">This year</th>
           <th *ngFor="let col of fcCols" style="min-width: 100px">
-            {{col}}
+            {{ col }}
           </th>
         </tr>
       </ng-template>
@@ -104,30 +143,43 @@
         let-rowspan="rowspan"
       >
         <tr>
-            <!-- 項目  -->
-            <td
-              *ngIf="rowgroup"
-              [attr.rowspan]="rowspan"
-              style="min-width: 200px"
-              pFrozenColumn
-            >
-              <span class="p-text-bold p-ml-2">{{ customer.name }} </span>
-            </td>
-            <!--  金額類別  -->
-            <td style="min-width: 300px;" pFrozenColumn
-            [ngClass]="{'focus': this.editFormula === customer.company && this.editTitle === customer.name}"
-            >
-              <div class="formula-feild" >
-                <span>{{ customer.company }}
-                </span>
+          <!-- 項目  -->
+          <td
+            *ngIf="rowgroup"
+            [attr.rowspan]="rowspan"
+            style="min-width: 200px"
+            pFrozenColumn
+          >
+            <span class="p-text-bold p-ml-2">{{ customer.name }} </span>
+          </td>
+          <!--  金額類別  -->
+          <td
+            style="min-width: 300px"
+            pFrozenColumn
+            [ngClass]="{
+              focus:
+                this.editFormula === customer.company &&
+                this.editTitle === customer.name
+            }"
+          >
+            <div class="formula-feild">
+              <span>{{ customer.company }} </span>
 
-              <img  *ngIf="!customer.editable" width="25px" height="25px" alt="dropdown icon" class="i-formula " src="../assets/formula.png"  (click)="setEditFormula(customer.company,customer.name)"/>
-              </div>
-            </td>
+              <img
+                *ngIf="!customer.editable"
+                width="25px"
+                height="25px"
+                alt="dropdown icon"
+                class="i-formula"
+                src="../assets/formula.png"
+                (click)="setEditFormula(customer.company, customer.name)"
+              />
+            </div>
+          </td>
 
           <!-- Accumulated to last FY end  -->
           <ng-container *ngIf="customer.editable">
-            <td pEditableColumn style="min-width: 150px;" class="editable">
+            <td pEditableColumn style="min-width: 150px" class="editable">
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input
@@ -149,7 +201,7 @@
           </ng-container>
           <!-- This year -->
           <ng-container *ngIf="customer.editable">
-            <td pEditableColumn style="min-width: 150px;" class="editable">
+            <td pEditableColumn style="min-width: 150px" class="editable">
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input
@@ -171,32 +223,38 @@
           </ng-container>
           <!-- 202209 -->
           <ng-container *ngIf="customer.editable">
-            <td pEditableColumn style="min-width: 100px;" class="editable" *ngFor="let col of fcCols" >
+            <td
+              pEditableColumn
+              style="min-width: 100px"
+              class="editable"
+              *ngFor="let col of fcCols"
+            >
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input
                     pInputText
                     type="text"
-                    [value]="resolveField(customer.FC,col)"
-                    (input)="assign(customer.FC, col ,$event)"
+                    [value]="resolveField(customer.FC, col)"
+                    (input)="assign(customer.FC, col, $event)"
                   />
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{ resolveField(customer.FC,col)}}
+                  {{ resolveField(customer.FC, col) }}
                 </ng-template>
               </p-cellEditor>
             </td>
           </ng-container>
           <ng-container *ngIf="!customer.editable">
-            <td pEditableColumn style="min-width: 100px"
-
-            *ngFor="let col of fcCols; let i = index" >
+            <td
+              pEditableColumn
+              style="min-width: 100px"
+              *ngFor="let col of fcCols; let i = index"
+            >
               <span class="p-text-bold p-ml-2"
-                >{{ calc(customer,col,i) }}
+                >{{ calc(customer, col, i) }}
               </span>
             </td>
           </ng-container>
-
         </tr>
       </ng-template>
     </p-table>

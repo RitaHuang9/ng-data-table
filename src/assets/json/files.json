@@ -26,48 +26,6 @@
       ]
     },
     {
-      "label": "基本運算",
-      "data": "Pictures Folder",
-      "children": [
-        {
-          "label": "+",
-          "value": "+",
-          "data": "Barcelona Photo",
-          "leaf": true
-        },
-        {
-          "label": "-",
-          "value": "-",
-          "data": "PrimeFaces Logo",
-          "leaf": true
-        },
-        {
-          "label": "*",
-          "value": "*",
-          "data": "PrimeUI Logo",
-          "leaf": true
-        },
-        {
-          "label": "/",
-          "value": "/",
-          "data": "PrimeUI Logo",
-          "leaf": true
-        },
-        {
-          "label": "(",
-          "value": "(",
-          "data": "PrimeUI Logo",
-          "leaf": true
-        },
-        {
-          "label": ")",
-          "value": ")",
-          "data": "PrimeUI Logo",
-          "leaf": true
-        }
-      ]
-    },
-    {
       "label": "公式",
       "value": "formula",
       "data": "Pictures Folder",

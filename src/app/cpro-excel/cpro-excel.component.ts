@@ -7,7 +7,7 @@ import { OverlayPanel } from 'primeng/overlaypanel';
 import { log } from 'mathjs';
 import * as math from 'mathjs';
 
-interface Version {
+interface VersionChoose {
   name: string;
 }
 interface Project {
@@ -15,6 +15,11 @@ interface Project {
 }
 interface CproVersion {
   name: string;
+}
+
+interface Versions {
+  name: string;
+  formulaName: Map<string, string>;
 }
 
 @Component({
@@ -42,12 +47,14 @@ export class CproExcelComponent implements OnInit {
   editTitle: string = '';
 
   // header 下拉
-  versions: Version[] | undefined;
-  selectedVersion: Version | undefined;
+  versionChoose: VersionChoose[] | undefined;
+  selectedVersion: VersionChoose | undefined;
   projects: Project[] | undefined;
   selectedProject: Project | undefined;
   cproVersions: CproVersion[] | undefined;
   selectedCproVersion: CproVersion | undefined;
+
+  version: Versions[] | undefined;
 
   constructor(
     private customerService: CustomerService,
@@ -74,7 +81,7 @@ export class CproExcelComponent implements OnInit {
       this.files2[0].children = cols;
     });
 
-    this.versions = [
+    this.versionChoose = [
       { name: '202209' },
       { name: '202210' },
       { name: '202211' },
@@ -92,6 +99,20 @@ export class CproExcelComponent implements OnInit {
       { name: 'CPRO  version3' },
       { name: 'CPRO  version4' },
     ];
+
+    this.version = [
+      {
+        name: 'V.1',
+        formulaName: new Map(),
+      },
+      {
+        name: 'V.2',
+        formulaName: new Map(),
+      },
+    ];
+
+    this.formulaCols = this.version[0].formulaName
+
   }
 
   // 取得動態的FC欄位
@@ -157,20 +178,29 @@ export class CproExcelComponent implements OnInit {
   }
 
   //點選公式 並加入至input
-  nodeSelect(event: any) {
-    if (event.node.leaf) {
-      const addFormula = event.node.value ;
+  nodeSelect(event: any, label: string) {
     const value = this.formulaInput.nativeElement.value;
+    let addFormula = '';
 
-      const newValue =
-        //找caret前面的值
-        value.slice(0, Number(this.checkCaretPosition())) +
-        addFormula +
-        //找後面的值
-        value.slice(Number(this.checkCaretPosition()));
-
-      this.formulaInput.nativeElement.value = newValue;
+    if (label === 'tree' && event.node.leaf) {
+      // 樹狀結構內選項
+      addFormula = event.node.value;
+    } else if (label === 'tree' && !event.node.leaf) {
+      return;
+    } else {
+      // 基本公式
+      addFormula = label;
     }
+
+    const newValue =
+      //找caret前面的值
+      value.slice(0, Number(this.checkCaretPosition())) +
+      addFormula +
+      //找後面的值
+      value.slice(Number(this.checkCaretPosition()));
+
+    this.formulaInput.nativeElement.value = newValue;
+    this.formulaCols.set(this.editFormula, newValue);
   }
 
   merge(arr1: string[], arr2: string[]) {
@@ -196,7 +226,7 @@ export class CproExcelComponent implements OnInit {
     obj[key] = val.target.value; // okay
   }
 
-  setEditFormula(key: string, n:string) {
+  setEditFormula(key: string, n: string) {
     this.editFormula = key;
     this.editTitle = n;
   }
@@ -216,56 +246,35 @@ export class CproExcelComponent implements OnInit {
     const regex = /\[\[(.*?)\]\]/g;
     let formula = this.formulaCols.get(data.company);
 
-
     if (formula.length >= 2) {
       // const mathRegex = formula.match(regex)
       // console.log(mathRegex);
       const regexFormulaName = formula.match(regex)[0].replace(regex, '$1');
       const matchRegex = formula.match(regex);
 
-      matchRegex.forEach((item:any) => {
+      matchRegex.forEach((item: any) => {
         const companyName = item.replace(regex, '$1');
-        const result = this.customers.find(x => {
+        const result = this.customers.find((x) => {
           return x.company === companyName;
         });
         // console.log(result);
 
-        if(result){
-          const val = this.resolveField(result.FC,field);
-          if(val){
-
-            formula = formula.replace(regex, val)
-          }else{
-            formula = formula.replace(regex, 0)
+        if (result) {
+          const val = this.resolveField(result.FC, field);
+          if (val) {
+            formula = formula.replace(regex, val);
+          } else {
+            formula = formula.replace(regex, 0);
           }
-          console.log(formula,val);
-        }else{
-          formula = formula.replace(regex, 0)
+          console.log(formula, val);
+        } else {
+          formula = formula.replace(regex, 0);
         }
-
       });
 
-      //   if(item.company === regexFormulaName){
-      //     const value = Object.values(item.FC)
-
-      //     for (let key in value) {
-
-      //       const regexKey = formula.replace(regex, key);
-
-      //       console.log(value);
-
-      //       console.log(math.evaluate(regexKey),regexKey);
-      //       return math.evaluate(regexKey)
-      //     }
-
-      //     // console.log(regexKey);
-      //   }
-      // });
-
-      return math.evaluate(formula)
-    }else{
-      return this.resolveField(data.FC,field)
+      return math.evaluate(formula);
+    } else {
+      return this.resolveField(data.FC, field);
     }
-    // return this.formulaCols.get(data.company);
   }
 }
