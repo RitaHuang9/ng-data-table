@@ -218,7 +218,7 @@ export class CproExcelComponent implements OnInit {
     type ObjectKey = keyof typeof data;
 
     const myVar = field as ObjectKey;
-    return data[myVar];
+    return data[myVar] ? data[myVar] : '';
   }
 
   //set Object Value by property
@@ -247,9 +247,8 @@ export class CproExcelComponent implements OnInit {
     let formula = this.formulaCols.get(data.company);
 
     if (formula && formula.length >= 2) {
-      // const mathRegex = formula.match(regex)
-      // console.log(mathRegex);
-      const regexFormulaName = formula.match(regex)[0].replace(regex, '$1');
+
+
       const matchRegex = formula.match(regex);
 
       matchRegex.forEach((item: any) => {
@@ -257,20 +256,21 @@ export class CproExcelComponent implements OnInit {
         const result = this.customers.find((x) => {
           return x.company === companyName;
         });
-        // console.log(result);
+
 
         if (result) {
           const val = this.resolveField(result.FC, field);
           if (val) {
-            formula = formula.replace(regex, val);
+            formula = formula.replace( `[[${companyName}]]`, val);
           } else {
-            formula = formula.replace(regex, 0);
+            formula = formula.replace(`[[${companyName}]]`, 0);
           }
           console.log(formula, val);
         } else {
-          formula = formula.replace(regex, 0);
+          formula = formula.replace(`[[${companyName}]]`, 0);
         }
       });
+
 
       return math.evaluate(formula);
     } else {
