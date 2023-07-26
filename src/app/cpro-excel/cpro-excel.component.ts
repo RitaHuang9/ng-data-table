@@ -232,8 +232,8 @@ export class CproExcelComponent implements OnInit {
   }
 
   getEditFormula() {
-    if (this.editFormula) return this.formulaCols.get(this.editFormula);
-    else return '';
+    const formula = this.formulaCols.get(this.editFormula);
+    return formula ? formula :"";
   }
 
   saveFormula(event: any) {
@@ -246,7 +246,7 @@ export class CproExcelComponent implements OnInit {
     const regex = /\[\[(.*?)\]\]/g;
     let formula = this.formulaCols.get(data.company);
 
-    if (formula.length >= 2) {
+    if (formula && formula.length >= 2) {
       // const mathRegex = formula.match(regex)
       // console.log(mathRegex);
       const regexFormulaName = formula.match(regex)[0].replace(regex, '$1');
