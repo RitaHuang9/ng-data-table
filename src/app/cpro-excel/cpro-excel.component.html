@@ -65,7 +65,7 @@
             pButton
             type="button"
             label="確認"
-            class="btn"
+            class="btn btn-comfirm"
             (click)="op.hide()"
           ></button>
         </ng-template>
@@ -186,7 +186,9 @@
             </td>
           </ng-container>
           <ng-container *ngIf="!customer.editable">
-            <td pEditableColumn style="min-width: 100px"  *ngFor="let col of fcCols; let i = index" >
+            <td pEditableColumn style="min-width: 100px"
+
+            *ngFor="let col of fcCols; let i = index" >
               <span class="p-text-bold p-ml-2"
                 >{{ calc(customer,col,i) }}
               </span>

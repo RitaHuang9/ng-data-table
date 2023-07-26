@@ -1,16 +1,33 @@
 .btn {
-  background-color: rgb(106, 161, 228);
+  background-color: transparent;
+  border: 1px solid #eebd49;
+  color: #dea92f;
   margin-left: 10px;
-  border: transparent;
+  padding: 10px 12px;
   &:enabled:hover {
-    background-color: rgb(106, 161, 228);
-    opacity: 0.7;
+    background-color: #eebd49;
+    border: 1px solid transparent;
+    color: #fff;
   }
   &-secondary {
-    background-color: #6db7bc;
+    background-color: transparent;
+    border: 1px solid #3e8f77;
+    color: #3e8f77;
     &:enabled:hover {
-      background-color: #6db7bc;
-      opacity: 0.7;
+      background-color: #3e8f77;
+      color: #fff;
+    }
+  }
+  &-comfirm {
+    border: 1px solid transparent;
+    background-color: #147a5b;
+    color: #fff;
+    width: 100%;
+    margin-left: 0;
+    &:enabled:hover {
+      background-color: transparent;
+      border: 1px solid #147a5b;
+      color: #147a5b;
     }
   }
   &-export ::ng-deep {
@@ -39,7 +56,7 @@
 
 .formula {
   &-box {
-    padding: 20px  0 0;
+    padding: 20px 0 0;
     display: flex;
     align-items: center;
   }

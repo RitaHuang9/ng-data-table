@@ -115,8 +115,6 @@ export class CproExcelComponent implements OnInit {
           label: x.company,
           value: `[[${x.company}]]`,
           data: 'Work Folder',
-          expandedIcon: '',
-          collapsedIcon: '',
           leaf: true,
         });
 

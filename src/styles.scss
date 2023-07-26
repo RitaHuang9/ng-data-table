@@ -14,8 +14,10 @@ body {
   font-size: 15px;
 }
 
+// scrollbar style
 .p-dropdown-items-wrapper,
 .p-datatable-wrapper,
+.p-tree-selectable,
 body {
   &::-webkit-scrollbar {
     width: 7px;
@@ -41,7 +43,7 @@ body {
   &-tree {
     margin-bottom: 10px;
     .p-tree {
-      padding: 10px;
+      padding: 10px 4px;
       margin: 10px 0;
       height: 200px;
       overflow: auto;
@@ -143,6 +145,7 @@ body {
   // border-bottom: 2px solid #3e8f77;
 }
 
+
 .table {
   &-freeze {
     // max-width: 1250px;
@@ -161,6 +164,37 @@ body {
             position: sticky;
           }
         }
+        // 表格背景色：紅
+        tr:nth-child(1) {
+          td:not(:nth-child(1)):not(:nth-child(2)) {
+            background-color: #feefef;
+          }
+        }
+        tr:nth-child(2),
+        tr:nth-child(3) {
+          td:not(:nth-child(1)) {
+            background-color: #feefef;
+          }
+        }
+        // 表格背景色：黃
+        tr:nth-child(5),
+        tr:nth-child(6),
+        tr:nth-child(8),
+        tr:nth-child(10),
+        tr:nth-child(12),
+        tr:nth-child(14),
+        tr:nth-child(16),
+        tr:nth-child(18) {
+          td:not(:nth-child(1)) {
+            background-color: #fefbef;
+          }
+        }
+        // 表格背景色：藍
+        tr:nth-child(28) {
+          td:not(:nth-child(1)) {
+            background-color: #eff6fe;
+          }
+        }
         > tr > td {
           padding: 4px 10px;
         }
@@ -169,18 +203,18 @@ body {
     .p-inputtext {
       padding: 6px 10px;
     }
-    .formula-feild{
+    .formula-feild {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      p{
+      p {
         width: calc(100% - 30px);
         margin: 0;
       }
-      .i-formula{
+      .i-formula {
         padding: 4px;
         cursor: pointer;
-        &:hover{
+        &:hover {
           background-color: #e6f4eb;
         }
       }
@@ -192,4 +226,17 @@ body {
 .p-datatable .p-datatable-thead > tr > th {
   background: #3e8f77;
   color: #fff;
+}
+
+.p-overlaypanel {
+  .p-overlaypanel-close {
+    background: #167a5b;
+    top: 10px;
+    right: 10px;
+    &:enabled:hover {
+      background: transparent;
+      color: #167a5b;
+      border: 1px solid #167a5b;
+    }
+  }
 }
