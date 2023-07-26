@@ -23,10 +23,12 @@
     display: block;
     background-color: transparent;
     border: none;
-    margin: 0 10px 0;
-    padding: 10px 12px;
+    margin: 0 10px 0 0;
+    padding: 11px 12px 10px 10px;
+    border: 1px solid #3e8f77;
     &:enabled:hover {
-      background-color: #c9c9c9;
+      background-color: #e6f4eb;
+      border: 1px solid #e6f4eb;
     }
     img {
       width: 20px;
@@ -37,7 +39,7 @@
 
 .formula {
   &-box {
-    padding: 20px 0;
+    padding: 20px  0 0;
     display: flex;
     align-items: center;
   }

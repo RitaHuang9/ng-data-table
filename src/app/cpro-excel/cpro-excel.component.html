@@ -1,74 +1,76 @@
 <div class="container">
-  <div class="formula-box" style="display: none;">
-    <button
-      type="text"
-      class="btn btn-formula"
-      pButton
-      (click)="op.toggle($event)"
-    >
-      <img alt="dropdown icon" class="i-formula" src="../assets/formula.png" />
-    </button>
 
-    <p-overlayPanel #op [showCloseIcon]="true">
-      <ng-template pTemplate>
-        <!-- 收合按鈕 -->
-        <div style="margin: 10px 0">
-          <button
-            pButton
-            class="btn btn-secondary"
-            type="button"
-            label="全部展開"
-            (click)="expandAll()"
-            style="margin-left: 0"
-          ></button>
-          <button
-            pButton
-            class="btn"
-            type="button"
-            label="全部收起"
-            (click)="collapseAll()"
-          ></button>
-        </div>
-        <p-tree
-          [value]="files2"
-          class="c-tree"
-          selectionMode="multiple"
-          (onNodeSelect)="nodeSelect($event)"
-        ></p-tree>
-        <button
-          pButton
-          type="button"
-          label="確認"
-          class="btn"
-          (click)="op.hide()"
-        ></button>
-      </ng-template>
-    </p-overlayPanel>
-    <input type="text" #formulaInput pInputText style="width: 100%" [value]="getEditFormula()"  (change)="saveFormula($event)"/>
-  </div>
   <div class="header">
-    <h2 class="title">Flexible Forecast</h2>
-    <div>
-      <p-dropdown
-        [options]="versions"
-        [(ngModel)]="selectedVersion"
-        optionLabel="name"
-        placeholder="Version"
-      ></p-dropdown>
-      <p-dropdown
-        [options]="projects"
-        [(ngModel)]="selectedProject"
-        optionLabel="name"
-        placeholder="Project"
-      ></p-dropdown>
+    <div class="header-top">
+      <h2 class="title">Flexible Forecast</h2>
+      <div class="header-box">
+        <p-dropdown
+          [options]="versions"
+          [(ngModel)]="selectedVersion"
+          optionLabel="name"
+          placeholder="Version"
+        ></p-dropdown>
+        <p-dropdown
+          [options]="projects"
+          [(ngModel)]="selectedProject"
+          optionLabel="name"
+          placeholder="Project"
+        ></p-dropdown>
+        <p-dropdown
+          [options]="cproVersions"
+          [(ngModel)]="selectedCproVersion"
+          optionLabel="name"
+          placeholder="CPRO Version"
+        ></p-dropdown>
+        <input type="text" pInputText placeholder="CPRO version name" />
+      </div>
+    </div>
+    <div class="formula-box">
+      <button
+        type="text"
+        class="btn btn-formula"
+        pButton
+        (click)="op.toggle($event)"
+      >
+        <img alt="dropdown icon" class="i-formula" src="../assets/formula.png" />
+      </button>
 
-      <p-dropdown
-        [options]="cproVersions"
-        [(ngModel)]="selectedCproVersion"
-        optionLabel="name"
-        placeholder="CPRO Version"
-      ></p-dropdown>
-      <input type="text" pInputText placeholder="CPRO version name" />
+      <p-overlayPanel #op [showCloseIcon]="true">
+        <ng-template pTemplate>
+          <!-- 收合按鈕 -->
+          <div style="margin: 10px 0">
+            <button
+              pButton
+              class="btn btn-secondary"
+              type="button"
+              label="全部展開"
+              (click)="expandAll()"
+              style="margin-left: 0"
+            ></button>
+            <button
+              pButton
+              class="btn"
+              type="button"
+              label="全部收起"
+              (click)="collapseAll()"
+            ></button>
+          </div>
+          <p-tree
+            [value]="files2"
+            class="c-tree"
+            selectionMode="multiple"
+            (onNodeSelect)="nodeSelect($event)"
+          ></p-tree>
+          <button
+            pButton
+            type="button"
+            label="確認"
+            class="btn"
+            (click)="op.hide()"
+          ></button>
+        </ng-template>
+      </p-overlayPanel>
+      <input type="text" #formulaInput pInputText style="width: 100%" [value]="getEditFormula()"  (change)="saveFormula($event)"/>
     </div>
   </div>
   <div class="table-freeze">
@@ -76,7 +78,7 @@
       [value]="customers"
       scrollDirection="both"
       [scrollable]="true"
-      scrollHeight="calc(100vh - 100px)"
+      scrollHeight="calc(100vh - 200px)"
       styleClass="p-mt-3 p-datatable-sm"
       rowGroupMode="rowspan"
       groupRowsBy="group"
@@ -113,9 +115,12 @@
               <span class="p-text-bold p-ml-2">{{ customer.name }} </span>
             </td>
             <!--  金額類別  -->
-            <td style="min-width: 300px;" pFrozenColumn>
-              {{ customer.company }}
-              <img  *ngIf="!customer.editable" width="15px" alt="dropdown icon" class="i-formula" src="../assets/formula.png"  (click)="setEditFormula(customer.company)"/>
+            <td style="min-width: 300px;" pFrozenColumn >
+              <div class="formula-feild">
+                <span>{{ customer.company }}</span>
+
+              <img  *ngIf="!customer.editable" width="25px" height="25px" alt="dropdown icon" class="i-formula " src="../assets/formula.png"  (click)="setEditFormula(customer.company)"/>
+              </div>
             </td>
 
           <!-- Accumulated to last FY end  -->
@@ -181,9 +186,9 @@
             </td>
           </ng-container>
           <ng-container *ngIf="!customer.editable">
-            <td pEditableColumn style="min-width: 100px"  *ngFor="let col of fcCols" >
+            <td pEditableColumn style="min-width: 100px"  *ngFor="let col of fcCols; let i = index" >
               <span class="p-text-bold p-ml-2"
-                >{{ calc(customer,col) }}
+                >{{ calc(customer,col,i) }}
               </span>
             </td>
           </ng-container>
