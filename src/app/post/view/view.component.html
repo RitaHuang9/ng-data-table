@@ -1,0 +1,10 @@
+
+
+<div *ngFor="let product of products | keyvalue">
+  <h4 *ngIf="product.key === 'name'">名稱：<span>{{ product.value }}</span></h4>
+  <h4 *ngIf="product.key === 'unitPrice'">數量：<span>{{ product.value }}</span></h4>
+</div>
+<!-- <div *ngFor="let product of products | keyvalue">
+  <h4 *ngIf="product.key === 'name'">名稱：<span>{{ product.value }}</span></h4>
+  <h4 *ngIf="product.key === 'unitPrice'">數量：<span>{{ product.value }}</span></h4>
+</div> -->

@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+  <div class="form-group">
+      <label for="name">名稱:</label>
+      <input
+          formControlName="name"
+          id="name"
+          type="text"
+          class="form-control">
+      <!-- <div *ngIf="f.name.touched && f.name.invalid" class="alert alert-danger">
+          <div *ngIf="f.name.errors?.required">Title is required.</div>
+      </div> -->
+  </div>
+
+  <div class="form-group">
+      <label for="unitPrice">數量</label>
+      <input
+          formControlName="unitPrice"
+          id="unitPrice"
+          type="number"
+          class="form-control">
+      <!-- <div *ngIf="f.unitPrice.touched && f.unitPrice.invalid" class="alert alert-danger">
+          <div *ngIf="f.unitPrice.errors?.unitPrice">Body is required.</div>
+      </div> -->
+  </div>
+
+  <button class="btn" type="submit" [disabled]="!form.valid">Submit</button>
+</form>

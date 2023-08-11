@@ -1,0 +1,60 @@
+<div class="container">
+
+  <div class="card">
+    <p-table [value]="products" dataKey="id" >
+      <ng-template pTemplate="caption">
+        <div class="flex c-table-header">
+          <button
+            type="button"
+            pButton
+            pRipple
+            class="btn-export p-button-success p-button-outlined mr-2 btn"
+            routerLink="create/"
+          >
+            新增
+          </button>
+
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            編號
+          </th>
+          <th>
+            名稱
+          </th>
+          <th>
+            數量
+          </th>
+          <th>
+            功能
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="body"
+        let-product
+      >
+        <tr class="c-body-output">
+          <!-- body內資料 -->
+          <td>
+            {{ product.id }}
+          </td>
+          <td>
+            {{ product.name }}
+          </td>
+          <td>
+            {{ product.unitPrice }}
+          </td>
+          <td>
+            <button type="button" style="margin-right: 10px;" [routerLink]="['/index/', product.id, 'view']">檢視</button>
+            <button type="button" style="margin-right: 10px;" [routerLink]="['/index/', product.id, 'edit']">修改</button>
+            <button type="button" style="margin-right: 10px;" (click)="deletePost(product.id)">刪除</button>
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+  </div>
+</div>

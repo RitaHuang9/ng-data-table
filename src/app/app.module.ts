@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -30,6 +30,11 @@ import { CustomerService } from 'src/customerservice';
 import { CustomerServiceNew } from 'src/customerservice-new';
 import { MainComponent } from './main/main.component';
 import { CproExcelNewComponent } from './cpro-excel-new/cpro-excel-new.component';
+import { FormComponent } from './form/form.component';
+import { IndexComponent } from './post/index/index.component';
+import { ViewComponent } from './post/view/view.component';
+import { CreateComponent } from './post/create/create.component';
+import { EditComponent } from './post/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +42,12 @@ import { CproExcelNewComponent } from './cpro-excel-new/cpro-excel-new.component
     CproExcelComponent,
     DataTableComponent,
     MainComponent,
-    CproExcelNewComponent
+    CproExcelNewComponent,
+    FormComponent,
+    IndexComponent,
+    ViewComponent,
+    CreateComponent,
+    EditComponent
   ],
   imports: [
     AppRoutingModule,
@@ -57,7 +67,8 @@ import { CproExcelNewComponent } from './cpro-excel-new/cpro-excel-new.component
     HttpClientModule,
     FormsModule,
     OverlayPanelModule,
-    TreeModule
+    TreeModule,
+    ReactiveFormsModule
   ],
   providers: [ProductService,
     MessageService,

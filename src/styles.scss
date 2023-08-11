@@ -226,6 +226,23 @@ body {
   }
 }
 
+.btn {
+  background-color: rgb(106, 161, 228);
+  margin-left: 10px;
+  &:enabled:hover {
+    background-color: rgb(74, 116, 167);
+  }
+  &-secondary {
+    background-color: #6db7bc;
+  }
+  &-export ::ng-deep {
+    display: block;
+    .pi {
+      margin-right: 4px;
+    }
+  }
+}
+
 // 套件
 .p-datatable .p-datatable-thead > tr > th {
   background: #3e8f77;
