@@ -24,10 +24,10 @@ export class ViewComponent {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['postId'];
 
-    this.postService.find(this.id).subscribe((data: Product[])=>{
-      this.products = data;
-      console.log(this.products);
-      console.table(this.products);
+    this.postService.find(this.id).subscribe((data: Product)=>{
+      this.product = data;
+      console.log(this.product);
+      console.table(this.product);
 
     });
   }

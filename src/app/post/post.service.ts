@@ -41,10 +41,9 @@ export class PostService {
   }
 
   //修改/檢視-取得單筆資料
-  find(id: number): Observable<Product[]> {
+  find(id: number): Observable<Product> {
     return this.httpClient
-      .get<Product[]>(this.apiURL + `/${id}`)
-
+      .get<Product>(this.apiURL + `/${id}`)
       .pipe(catchError(this.errorHandler));
   }
 

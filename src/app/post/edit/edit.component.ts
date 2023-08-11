@@ -15,6 +15,9 @@ export class EditComponent {
   form!: FormGroup;
   products!: Product[];
 
+  product: Product | null = null;
+
+
   constructor(
     public postService: PostService,
     private route: ActivatedRoute,
@@ -24,9 +27,9 @@ export class EditComponent {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['postId'];
 
-    this.postService.find(this.id).subscribe((data: Product[]) => {
-      this.products = data;
-      console.table(this.products);
+    this.postService.find(this.id).subscribe((data: Product) => {
+      this.product = data;
+      console.table(this.product);
 
     });
 

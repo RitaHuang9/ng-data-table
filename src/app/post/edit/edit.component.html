@@ -7,6 +7,7 @@
           formControlName="name"
           id="name"
           type="text"
+          [value]="product?.name"
           class="form-control">
   </div>
 
@@ -16,6 +17,7 @@
           formControlName="unitPrice"
           id="unitPrice"
           type="number"
+          [value]="product?.unitPrice"
           class="form-control">
   </div>
   <button class="btn" type="submit" [disabled]="!form.valid">Submit</button>

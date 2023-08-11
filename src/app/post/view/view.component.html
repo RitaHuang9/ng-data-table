@@ -1,10 +1,11 @@
 
+<button type="button" style="margin: 10px;" [routerLink]="['/index']">回列表</button>
 
-<div *ngFor="let product of products | keyvalue">
-  <h4 *ngIf="product.key === 'name'">名稱：<span>{{ product.value }}</span></h4>
-  <h4 *ngIf="product.key === 'unitPrice'">數量：<span>{{ product.value }}</span></h4>
+<div >
+  <h4>名稱：
+    <span>{{ product?.name }}</span>
+  </h4>
+  <h4>數量：
+    <span>{{ product?.unitPrice }}</span>
+  </h4>
 </div>
-<!-- <div *ngFor="let product of products | keyvalue">
-  <h4 *ngIf="product.key === 'name'">名稱：<span>{{ product.value }}</span></h4>
-  <h4 *ngIf="product.key === 'unitPrice'">數量：<span>{{ product.value }}</span></h4>
-</div> -->
