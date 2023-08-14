@@ -28,7 +28,6 @@ export class ViewComponent {
       this.product = data;
       console.log(this.product);
       console.table(this.product);
-
     });
   }
 }
